@@ -11,48 +11,69 @@
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <%= render "devise/shared/error_messages", resource: resource %>
               
-              <div class="field">
-                <%= f.label :first_name %><br />
-                <%= f.text_field :first_name, autofocus: true, placeholder: "John" %>
-                
-              </div>
               
-              <div class="field">
-                <%= f.label :last_name %><br />
-                <%= f.text_field :last_name, autofocus: true, placeholder: "Doe"%>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                      <%= f.label :first_name %><br />
+                      <%= f.text_field :first_name, autofocus: true, placeholder: "John" ,size:"25"%>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <%= f.label :last_name %><br />
+                    <%= f.text_field :last_name, autofocus: true, placeholder: "Doe",size: "25"%>
+                  </div>
+
+                </div>
               </div>
 
-              <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              <div class="form-outline mb-4">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email",size: "60"%>
               </div>
 
-              <div class="field">
-                <%= f.label :password %>
-                <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "new-password" %>
+              
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <%= f.label :password %>
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %><br />
+                    <%= f.password_field :password, autocomplete: "new-password" ,size:"25"%>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password",size:"25" %>
+                  </div>
+
+                </div>
               </div>
 
-              <div class="field">
-                <%= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-              </div>
 
-              <div class="field">
+              <div class="form-outline mb-4">
                 <%= f.label :country %><br />
                 <%= f.country_select :country, autofocus: true, placeholder: "Nigeria" %>
               </div>
               
               <div class="field">
                 <%= f.label :phone_number %><br />
-                <%= f.text_field :country_code, autofocus: true, placeholder: '92'%>
+                <%= f.text_field :country_code, autofocus: true, placeholder: '92',size: "7"%>
                 <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000" %>
               </div>
 
 
               <br>
+              <p>By voluntarily registering on this site, you consent to:</p>
               <p class = "lh-1">
                 By voluntarily registering on this site, you consent to:
 
@@ -67,9 +88,12 @@
                 Privacy Policy link will redirect to new page By default no option selected and it's mandatory to select Yes for Signup
               </p>
                               
-              <%=f.check_box :terms_of_service %>
-              <%= f.label :terms_of_service ,"I agree"%>
+              <%=f.radio_button :terms_of_service, "1"  %>
+              <%= f.label :terms_of_service ,"I agree", value: true%>
               <br>
+              <%=f.radio_button :terms_of_service, "0"  %>
+              <%= f.label :terms_of_service ,"I do not agree", value: false%>
+              <br><br>
             
               
               <div class="actions">
