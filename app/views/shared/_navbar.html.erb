@@ -4,15 +4,13 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> %>
-    <%#= link_to root_url do %>
-         <%#= image_tag ("background.png" ),size: "100x50" %> 
-     <%# end %>
+  
+    <%= link_to root_url do %>
+        <%= image_tag ("nav-logo.png" ),size: "230x50" %>
+    <% end %>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-
+        
         <%# <li class="nav-item">
           <%= link_to "Articles", articles_path, class: "nav-link"%>
         <%# </li> %>
@@ -27,17 +25,17 @@
             </li> 
          
             <li>
-              <%=link_to 'Logout',destroy_user_session_path, method: :delete, class: "nav-link"%>
+              <%=link_to 'Logout',destroy_user_session_path, method: :delete, class: "btn btn-outline-success"%>
             </li>
 
           <% else %>
 
             <li class="nav-item">
-              <%= link_to "Login", new_user_session_path, class:"btn btn-outline-primary" %>
+              <%= link_to "Login", new_user_session_path, class:"btn btn-outline-success" %>
             </li>
             &nbsp
             <li class="nav-item">
-              <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-outline-primary" %>
+              <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-outline-success" %>
             </li>
           <% end %>
         </ul>

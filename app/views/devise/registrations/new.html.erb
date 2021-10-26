@@ -1,110 +1,108 @@
-<section class="h-100 h-custom" style="background-color: #8fc4b7;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-lg-8 col-xl-6">
-        <div class="card rounded-3">
-          <%# <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/img3.jpg" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo"> %>
-          <div class="card-body p-4 p-md-5">
 
-            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Sign up</h2>
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-lg-8 col-xl-6">
+    <div class="card rounded-3">
+      <%# <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/img3.jpg" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo"> %>
+      <div class="card-body p-4 p-md-5">
 
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-              <%= render "devise/shared/error_messages", resource: resource %>
-              
-              
-              <div class="row">
-                <div class="col-md-6 mb-4">
+        <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Sign up</h2>
 
-                  <div class="form-outline">
-                      <%= f.label :first_name %><br />
-                      <%= f.text_field :first_name, autofocus: true, placeholder: "John" ,size:"25"%>
-                  </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        
+          <%= render "devise/shared/error_messages", resource: resource %>
+          
+          
+          <div class="row">
+            <div class="col-md-6 mb-4">
 
-                </div>
-                <div class="col-md-6 mb-4">
-
-                  <div class="form-outline">
-                    <%= f.label :last_name %><br />
-                    <%= f.text_field :last_name, autofocus: true, placeholder: "Doe",size: "25"%>
-                  </div>
-
-                </div>
+              <div class="form-outline">
+                  <%= f.label :first_name %><br />
+                  <%= f.text_field :first_name, autofocus: true, placeholder: "John" ,size:"25"%>
               </div>
 
-              <div class="form-outline mb-4">
-                  <%= f.label :email %><br />
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email",size: "60"%>
+            </div>
+            <div class="col-md-6 mb-4">
+
+              <div class="form-outline">
+                <%= f.label :last_name %><br />
+                <%= f.text_field :last_name, autofocus: true, placeholder: "Doe",size: "25"%>
               </div>
 
-              
-              <div class="row">
-                <div class="col-md-6 mb-4">
+            </div>
+          </div>
 
-                  <div class="form-outline">
-                    <%= f.label :password %>
-                    <% if @minimum_password_length %>
-                    <em>(<%= @minimum_password_length %> characters minimum)</em>
-                    <% end %><br />
-                    <%= f.password_field :password, autocomplete: "new-password" ,size:"25"%>
-                  </div>
+          <div class="form-outline mb-4">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email",size: "60"%>
+          </div>
 
-                </div>
-                <div class="col-md-6 mb-4">
+          
+          <div class="row">
+            <div class="col-md-6 mb-4">
 
-                  <div class="form-outline">
-                    <%= f.label :password_confirmation %><br />
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password",size:"25" %>
-                  </div>
-
-                </div>
+              <div class="form-outline">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "new-password" ,size:"25"%>
               </div>
 
+            </div>
+            <div class="col-md-6 mb-4">
 
-              <div class="form-outline mb-4">
-                <%= f.label :country %><br />
-                <%= f.country_select :country, autofocus: true, placeholder: "Nigeria" %>
-              </div>
-              
-              <div class="field">
-                <%= f.label :phone_number %><br />
-                <%= f.text_field :country_code, autofocus: true, placeholder: '92',size: "7"%>
-                <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000" %>
+              <div class="form-outline">
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password",size:"25" %>
               </div>
 
+            </div>
+          </div>
 
-              <br>
-              <p>By voluntarily registering on this site, you consent to:</p>
-              <p class = "lh-1">
-              
 
-                (i) the collection, use and disclosure by the XYZ Institutions of your personal information, 
-                including your personal health information for the purposes of: 
-                (a) institutional planning to assist with the creation (b) notification and/or delivery of other programs and services 
-                (c) statistical analysis necessary to further assist  
-                (d) planning of or response to a natural disaster or other event deemed to be an emergency (collectively, the "Purposes"); 
-                and 
-                (ii) being contacted by the XYZ Institutions for reasons related to the Purposes. 
-                For more information please review our Privacy Policy. *
-                Privacy Policy link will redirect to new page By default no option selected and it's mandatory to select Yes for Signup
-              </p>
-                              
-              <%=f.radio_button :terms_of_service, "1"  %>
-              <%= f.label :terms_of_service ,"I agree", value: true%>
-              <br>
-              <%=f.radio_button :terms_of_service, "0"  %>
-              <%= f.label :terms_of_service ,"I do not agree", value: false%>
-              <br><br>
-            
-              
-              <div class="actions">
-                <%= f.submit "Sign up" %>
-              </div>
-            <% end %>
-            <br>
-            <%= render "devise/shared/links" %>
-          <div>
-        <div>
+          <div class="form-outline mb-4">
+            <%= f.label :country %><br />
+            <%= f.country_select :country, autofocus: true, placeholder: "Nigeria" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :phone_number %><br />
+            <%= f.text_field :country_code, autofocus: true, placeholder: '92',size: "7"%>
+            <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000" %>
+          </div>
+
+
+          <br>
+          <p>By voluntarily registering on this site, you consent to:</p>
+          <p class = "lh-1">
+          
+
+            (i) the collection, use and disclosure by the XYZ Institutions of your personal information, 
+            including your personal health information for the purposes of: 
+            (a) institutional planning to assist with the creation (b) notification and/or delivery of other programs and services 
+            (c) statistical analysis necessary to further assist  
+            (d) planning of or response to a natural disaster or other event deemed to be an emergency (collectively, the "Purposes"); 
+            and 
+            (ii) being contacted by the XYZ Institutions for reasons related to the For more information please review our 
+            <a href = https://ge-stage-2019.herokuapp.com/privacy_policy >Privacy Policy.</a>
+
+          </p>
+                          
+          <%=f.radio_button :terms_of_service, "1"  %>
+          <%= f.label :terms_of_service ,"I agree", value: true%>
+          <br>
+          <%=f.radio_button :terms_of_service, "0"  %>
+          <%= f.label :terms_of_service ,"I do not agree", value: false%>
+          <br><br>
+        
+          
+          <div class="actions">
+            <%= f.submit "Sign up" %>
+          </div>
+        <% end %>
+        <br>
+        <%= render "devise/shared/links" %>
       <div>
     <div>
   <div>
-<section>
+<div>
