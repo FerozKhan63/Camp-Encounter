@@ -1,43 +1,38 @@
-<nav class="navbar  navbar-expand-lg navbar-light" style="background-color: #f8f9f9;">
+<nav class="navbar navbar-expand-lg navbar-light navbar-slide-nav" style="background-color: #f8f9f9;">
   <div class="container-fluid">
-    <%# <a class="navbar-brand" href="#">Square63</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> %>
-  
     <%= link_to root_url do %>
-        <%= image_tag ("nav-logo.png" ),size: "230x50" %>
+      <%= image_tag ("nav-logo.png" ),size: "220x50" %>
     <% end %>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        
-        <%# <li class="nav-item">
-          <%= link_to "Articles", articles_path, class: "nav-link"%>
-        <%# </li> %>
-       
-       
-      </ul>
+        <li class ="nav-item">
+          <%# if current_user.ADMIN? %>
+            <b><%= link_to "Users",users_path,class: "link-success" %></b>
+          <%# end%> 
+        </li>
+       </ul>
     </div>
-        <ul class="nav navbar-nav navbar-right"> 
-          <% if user_signed_in? %>
-            <li class = "nav-item">
-              <%=link_to current_user.email, edit_user_password_path, class: "nav-link"%>
-            </li> 
-         
-            <li>
-              <%=link_to 'Logout',destroy_user_session_path, method: :delete, class: "btn btn-outline-success"%>
-            </li>
+    
+    <ul class="nav navbar-nav navbar-right"> 
+      <% if user_signed_in? %>
+        <li class = "nav-item">
+          <%= link_to current_user.email, edit_user_password_path, class: "nav-link" %>
+        </li>
+        
+        <li>
+          <%= link_to 'Logout',destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_path, class:"btn btn-outline-success" %>
+        </li>
+        &nbsp
+        <li class="nav-item">
+          <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-outline-success" %>
+        </li>
+      <% end %>
+    </ul>
 
-          <% else %>
-
-            <li class="nav-item">
-              <%= link_to "Login", new_user_session_path, class:"btn btn-outline-success" %>
-            </li>
-            &nbsp
-            <li class="nav-item">
-              <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-outline-success" %>
-            </li>
-          <% end %>
-        </ul>
   </div>
 </nav>
