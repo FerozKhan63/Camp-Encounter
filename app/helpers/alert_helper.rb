@@ -12,4 +12,4 @@ module AlertHelper
           classes += 'alert-info'
       end
     end
-  end
+end

@@ -2,11 +2,14 @@
 
 <h1>Users</h1>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
+      <th>Phone Number</th>
+      <th>Country</th>
+      <th>Actions</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,10 +17,15 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.first_name %></td>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
         <td><%= user.email %></td>
-        <%# <td><%= link_to 'Edit', edit_user_path(@users) %></td> %>
-        <%# <td><%= link_to 'Destroy', user_path, method: :delete, data: { confirm: 'Are you sure?' } %></td> %>
+        <td><%= "#{user.country_code} #{user.phone_number}" %></td>
+        <td><%= user.country%></td>
+        <td>
+          <%= link_to 'Show', user_path(@users), class: "btn btn-primary"%>
+          <%= link_to 'Edit', edit_user_path(@users), class: "btn btn-success" %>
+          <%= link_to 'Destroy', users_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </td> 
       </tr>
     <% end %>
   </tbody>
@@ -25,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_user_path %>
+<%= link_to 'Add New User', new_user_path %>
