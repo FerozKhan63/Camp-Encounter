@@ -23,6 +23,9 @@ class UsersController < AdminController
 
   def destroy
     @user.destroy
+    respond_to do |format|
+      format.js
+    end  
   end
   
   private

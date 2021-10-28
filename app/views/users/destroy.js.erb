@@ -1,0 +1,5 @@
+console.log($("#user_<%= @user.id %>"));
+$("#user_<%= @user.id %>").fadeOut(500,()=>{
+   $(this).remove(); 
+})
+
