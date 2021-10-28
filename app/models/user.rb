@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include PgSearch::Model
+  
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
   
   ADMIN = :admin
@@ -7,11 +8,7 @@ class User < ApplicationRecord
   SUPER_ADMIN = :superadmin
   ROLES = [USER, SUPER_ADMIN, ADMIN]
   enum role: ROLES
-  # ROLES = {
-  #   admin: "admin",
-  #   super_admin: "super_admin"
-  # }.freeze
-
+ 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,:confirmable
     
   validates :first_name,presence: true ,length: { minimum: 2 },format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }

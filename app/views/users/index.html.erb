@@ -6,10 +6,12 @@
     <h1>Users</h1>
 
     <%= form_with(url: users_path, method: :get) do |f| %>
-      <%= f.text_field :query %>
-      <%= f.submit "Search" %>
+      <%= f.text_field :query, placeholder: "Search by User ID Name or Email" %>
+      <%= f.submit "Search" ,class: "btn btn-success"%>
     <% end %>
-    
+    <div id = "new-user">
+      <%= link_to 'Add New User', new_user_path, class: "btn btn-success", remote: true %>
+    </div>
     <hr>
     <table class="table table-bordered">
       <thead>
@@ -44,8 +46,7 @@
       </tbody>
 
     </table><br>
-    <div id = "new-user">
-      <%= link_to 'Add New User', new_user_path, class: "btn btn-success", remote: true %>
-    </div>
+  
+    <%= pagy_bootstrap_nav(@pagy).html_safe %> 
   <div>
 <div>

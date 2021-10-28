@@ -30,6 +30,8 @@ gem 'devise'
 
 gem 'pg_search'
 
+gem 'pagy'
+
 #Add  country to signup form
 gem 'country_select', '~> 6.0'
 
