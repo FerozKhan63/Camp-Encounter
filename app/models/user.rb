@@ -3,6 +3,7 @@ class User < ApplicationRecord
   include PgSearch::Model
   
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
+  after_initialize :set_default_role, :if => :new_record?
   
   ADMIN = :admin
   USER = :user
@@ -20,7 +21,7 @@ class User < ApplicationRecord
   validates :terms_of_service ,acceptance: {message: 'If you do not agree to the terms and service please contact global@campencounter.com'}
   
   
-  after_initialize :set_default_role, :if => :new_record?
+  
   def set_default_role
     self.role ||= :user
   end
@@ -40,5 +41,4 @@ class User < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
-
 end
