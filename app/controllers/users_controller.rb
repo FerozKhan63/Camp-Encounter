@@ -4,9 +4,9 @@ class UsersController < AdminController
   def index
     # byebug
     if params[:query].present?
-      @pagy, @users = pagy(User.global_search(params[:query]), items: 3)
+      @pagy, @users = pagy(User.global_search(params[:query]).order(created_at: :asc), items: 3)
     else
-      @pagy, @users = pagy(User.all, items: 3)
+      @pagy, @users = pagy(User.order(created_at: :asc), items: 3)
     end
   end
 
