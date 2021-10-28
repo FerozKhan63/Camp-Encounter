@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
+  
   ADMIN = :admin
   USER = :user
   SUPER_ADMIN = :superadmin
@@ -10,8 +13,7 @@ class User < ApplicationRecord
   # }.freeze
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,:confirmable
-
-  validates :email, uniqueness: true       
+    
   validates :first_name,presence: true ,length: { minimum: 2 },format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :country, presence: true, length: {minimum: 2}, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :phone_number,uniqueness: true, format: {with: /\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}/, message: "Phone numbers must be in xxx-xxx-xxxx format."}

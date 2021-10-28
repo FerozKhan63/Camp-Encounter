@@ -1,11 +1,16 @@
 <%# <p id="notice"><%= notice %>
-
 <%= render  "layouts/sidebar" %>
-<%= render "layouts/formlayout" %>
-
+<%#= render "layouts/formlayout" %>
 <div class="card rounded-3">
   <div class="card-body">
     <h1>Users</h1>
+
+    <%= form_with(url: users_path, method: :get) do |f| %>
+      <%= f.text_field :query %>
+      <%= f.submit "Search" %>
+    <% end %>
+    
+    <hr>
     <table class="table table-bordered">
       <thead>
         <tr>

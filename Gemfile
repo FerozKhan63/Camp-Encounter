@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise' 
 
+gem 'pg_search'
+
 #Add  country to signup form
 gem 'country_select', '~> 6.0'
 
