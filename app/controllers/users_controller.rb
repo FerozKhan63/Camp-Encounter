@@ -8,6 +8,10 @@ class UsersController < AdminController
     else
       @pagy, @users = pagy(User.order(created_at: :asc), items: 3)
     end
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+    end
   end
 
   def new
