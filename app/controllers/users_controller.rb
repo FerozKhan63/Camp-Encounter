@@ -25,7 +25,14 @@ class UsersController < AdminController
   
   def create; end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+   
+    respond_to do |format|
+      format.js
+      format.html 
+    end
+  end
 
   def edit; end
 
@@ -44,7 +51,7 @@ class UsersController < AdminController
     @user = User.find(params[:id])
   end
 
-  # def user_params
-  #   params.require(:user).permit(:first_name, :email)
-  # end
+  def user_params
+    params.require(:users).permit(:first_name, :last_name, :email, :country_code, :phone_number, :country, :role)
+  end
 end

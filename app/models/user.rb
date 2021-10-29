@@ -21,7 +21,6 @@ class User < ApplicationRecord
   validates :terms_of_service ,acceptance: {message: 'If you do not agree to the terms and service please contact global@campencounter.com'}
   
   
-  
   def set_default_role
     self.role ||= :user
   end
