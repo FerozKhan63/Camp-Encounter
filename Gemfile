@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise' 
 
+gem 'devise_invitable', '~> 2.0.0'
+
 gem 'pg_search'
 
 gem 'pagy'
