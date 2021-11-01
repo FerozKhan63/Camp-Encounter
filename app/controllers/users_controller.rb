@@ -2,7 +2,6 @@ class UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
-    # byebug
     if params[:query].present?
       @pagy, @users = pagy(User.global_search(params[:query]).order(created_at: :asc), items: 3)
     else
@@ -24,11 +23,10 @@ class UsersController < AdminController
   end
   
   def create
-    # byebug
     @user = User.new(user_params)
     @user.skip_password_validation = true
     @user.skip_confirmation!
-    # @user.send_reset_password_instructions
+  
     raw, enc = Devise.token_generator.generate(User, :reset_password_token)
     @user.reset_password_token   = enc
     @user.reset_password_sent_at = Time.now.utc
@@ -37,7 +35,6 @@ class UsersController < AdminController
       UserMailer.send_invite_email(@user,raw).deliver
       redirect_to users_path
       flash[:success] = "An invitation has been sent to the user!"
-      
     else
       flash.now[:error] = "There are some errors in the provided details. Please resubmit the form with the correct details."
       render :new
@@ -68,11 +65,6 @@ class UsersController < AdminController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def generate_token
-    @user.reset_password_token   = User.reset_password_token
-    @user.reset_password_sent_at = Time.now.utc
   end
 
   def user_params
