@@ -54,9 +54,17 @@ class UsersController < AdminController
     end
   end
 
-  def edit; end
+  def edit
 
-  def update; end
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to users_path
+     else
+      render 'edit'
+     end
+  end
 
   def destroy
     @user.destroy
