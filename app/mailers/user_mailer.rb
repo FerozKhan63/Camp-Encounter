@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
   default from: "feroz@campencounter.com"
 
-  def send_invite_email(user) 
+  def send_invite_email(user,raw) 
         @user = user 
-        @token = user.reset_password_token
+        @token = raw
         mail( to: @user.email, subject: 'Welcome to Encounters!')
     end 
  end

@@ -1,5 +1,5 @@
 <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> New User</h2><hr>
-<%= form_with(model: @user) do |f| %>
+<%= form_with(model: @user, url: admin_users_path) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>

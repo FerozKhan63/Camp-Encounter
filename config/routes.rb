@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   #   resources :users
   # end
 
+  resource :user
+
   namespace :admin do
     resources :users
   end
-  resources :users
 
   
   root to: "home#index"

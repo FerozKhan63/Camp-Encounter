@@ -29,11 +29,11 @@ class Admin::UsersController < AdminController
     @user.skip_confirmation!
 
     raw, enc = Devise.token_generator.generate(User, :reset_password_token)
-    @user.reset_password_token   = raw
+    @user.reset_password_token   = enc
     @user.reset_password_sent_at = Time.now.utc
 
     if @user.save
-      UserMailer.send_invite_email(@user).deliver
+      UserMailer.send_invite_email(@user,raw).deliver
       redirect_to admin_users_path
       flash[:success] = "An invitation has been sent to the user!"
     else

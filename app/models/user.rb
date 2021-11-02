@@ -13,7 +13,7 @@ class User < ApplicationRecord
   ROLES = [USER, SUPER_ADMIN, ADMIN]
   enum role: ROLES
  
-  devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
     
   validates :first_name,presence: true ,length: { minimum: 2 },format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :country, presence: true, length: {minimum: 2}, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
