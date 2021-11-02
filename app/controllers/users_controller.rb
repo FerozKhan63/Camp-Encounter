@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+class UsersController < Devise::RegistrationsController
+  before_action :set_user, only: %i[ show update destroy ]
 
   def show
     respond_to do |format|
@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       format.html 
     end
   end
-  
+
   private
 
   def set_user
