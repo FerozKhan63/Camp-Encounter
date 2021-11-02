@@ -1,5 +1,6 @@
 require 'csv'
 class User < ApplicationRecord
+  has_one_attached :profile_picture, dependent: :destroy
   include PgSearch::Model
   attr_accessor :skip_password_validation
 

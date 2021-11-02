@@ -5,7 +5,7 @@
     <div class="card rounded-3">
       <div class="card-body p-4 p-md-5">
        <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Edit User</h2><hr>
-        <%= form_with(model: @user) do |f| %>
+        <%= form_with(model: @user, url: admin_user_path) do |f| %>
           <% if @user.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -17,6 +17,21 @@
               </ul>
             </div>
           <% end %>
+
+          <center>
+            <% if @user.profile_picture.attached? %>
+              <%= image_tag @user.profile_picture, size: "220x220" %>
+            <% end %>
+          </center> 
+          <hr>
+          
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                  <%= f.label :profile_picture %><br />
+                  <%= f.file_field :profile_picture %>
+              </div>
+          </div>
 
           <div class="row">
             <div class="col-md-6 mb-4">
