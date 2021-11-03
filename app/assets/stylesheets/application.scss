@@ -1,6 +1,19 @@
- @import "bootstrap/scss/bootstrap";
- 
- #wrapper {
+@import "bootstrap/scss/bootstrap";
+
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+.pretty th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+#wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
