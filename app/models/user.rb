@@ -1,4 +1,5 @@
 require 'csv'
+
 class User < ApplicationRecord
   include PgSearch::Model
   attr_accessor :skip_password_validation
@@ -7,14 +8,14 @@ class User < ApplicationRecord
   has_many :camps
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
+
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
   
   ADMIN = :admin
   USER = :user
   SUPER_ADMIN = :superadmin
   ROLES = [USER, SUPER_ADMIN, ADMIN]
   enum role: ROLES, _default: :user
- 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
     
   validates :first_name, presence: true ,length: { minimum: 2 }, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :country, presence: true, length: { minimum: 2 }, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }

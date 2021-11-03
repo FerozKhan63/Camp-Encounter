@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_114858) do
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string "location"
+    t.text "locations", default: [], array: true
     t.datetime "registration_date"
     t.integer "status"
     t.bigint "user_id"

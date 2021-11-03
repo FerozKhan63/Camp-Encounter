@@ -1,0 +1,62 @@
+<h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> New Camp</h2><hr>
+<%= form_with(model: @camp, url: admin_camps_path) do |f| %>
+  <% if @camp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@camp.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @camp.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+          <%= f.label :name %><br />
+          <%= f.text_field :name, autofocus: true, placeholder: "Nathia Gali", size:"30"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+          <%= f.label :start_date %><br />
+          <%= f.date_field :start_date, autofocus: true, size:"25"%>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= f.label :end_date %><br />
+        <%= f.date_field :end_date, autofocus: true, size: "5"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+          <%= f.label :locations %><br />
+          <%= f.collection_check_boxes :locations, Camp::LOCATIONS, :to_s, :to_s %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+          <%= f.label :status %><br />
+          <%= f.select :status, ['active', 'inactive'], size: "10" %>
+      </div>
+    </div>
+  </div>
+ 
+  <br>
+ 
+  <div class="actions">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>

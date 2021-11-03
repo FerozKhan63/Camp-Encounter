@@ -23,6 +23,16 @@ class Admin::CampsController < AdminController
     end 
   end
 
+  def create
+    @camp = Camp.new(camp_params)
+
+    if @camp.save
+      redirect_to admin_camps_path
+    else
+      render 'new'
+    end
+  end
+
   def destroy
     @camp.destroy
 
@@ -35,6 +45,10 @@ class Admin::CampsController < AdminController
   
   def set_camp
     @camp = Camp.find(params[:id])
+  end
+
+  def camp_params
+    params.require(:camp).permit(:name, :start_date, :end_date, :registration_date, :status, locations: [])
   end
   
   def sort_column
