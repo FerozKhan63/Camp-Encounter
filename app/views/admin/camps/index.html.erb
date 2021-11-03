@@ -1,0 +1,50 @@
+<div class="card rounded-3">
+  <div class="card-body">
+    <h1>Camps</h1>
+    <div class="row">
+    <div class = "col-lg-6">
+      <%= form_with(url: admin_camps_path, method: :get) do |f| %>
+        <%= f.text_field :query, class: 'search', placeholder: "Search by Camp Location Title" %>
+        <%= f.submit "Search" , class: "btn btn-success"%>
+      <% end %>
+    </div>
+    <div class = "col-lg-6">
+      <div class="button" id = "new-user">
+        <%= link_to 'Add Camp', new_admin_camp_path, class: "btn btn-success" %>
+      </div>
+    </div>
+
+    </div>
+    <hr>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Registration Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @camps.each do |camp| %>
+          <tr id="camp_<%= camp.id %>">
+            <td><%= camp.name %></td>
+            <td><%= camp.location %></td>
+            <td><%= camp.status %></td>
+            <td><%= camp.registration_date %></td>
+            <td>
+              <%= link_to 'Show', admin_camp_path(camp), class: "btn btn-primary"%>
+              <%#= link_to 'Edit', edit_admin_camp_path(camp), class: "btn btn-success", disabled: "true"%>
+              <%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-danger"%>
+            </td> 
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table><br>
+    <p><%= link_to("Generate Report", admin_camps_path(format: :csv), class: "btn btn-success",) %></p>
+    <%= pagy_bootstrap_nav(@pagy).html_safe %> 
+  <div>
+<div>
