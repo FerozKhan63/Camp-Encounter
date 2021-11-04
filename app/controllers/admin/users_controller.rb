@@ -2,7 +2,6 @@ class Admin::UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
-    # byebug
     if params[:query].present?
       @pagy, @users = pagy(User.global_search(params[:query]).order(created_at: :asc), items: 3)
     else

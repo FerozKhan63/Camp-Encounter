@@ -1,2 +1,0 @@
-class Camp < ApplicationRecord
-end
