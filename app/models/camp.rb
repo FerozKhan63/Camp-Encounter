@@ -4,11 +4,6 @@ class Camp < ApplicationRecord
   include PgSearch::Model
   
   belongs_to :user, optional: true
-
-  ACTIVE = :active
-  INACTIVE = :inactive
-  STATUS = [ACTIVE, INACTIVE]
-  enum status: STATUS
  
   LOCATIONS = ['Kenya', 'Pakistan', "South Africa", "Egypt", "Alaska"].freeze
 
@@ -17,6 +12,7 @@ class Camp < ApplicationRecord
   validates :name, presence: true , length: { minimum: 5 }, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates :end_date, :start_date, presence: true
   validate :end_date_after_start_date? 
+  validate :start_date_before_reg_date?
 
   private
 
@@ -33,8 +29,14 @@ class Camp < ApplicationRecord
   end
 
   def end_date_after_start_date?
-    if end_date < start_date
+    if self.end_date < self.start_date
       errors.add :end_date, "must be after start date"
+    end
+  end
+
+  def start_date_before_reg_date?
+    if self.start_date < self.registration_date
+      errors.add :start_date, "must be after registration date"
     end
   end
 end

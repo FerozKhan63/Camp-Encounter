@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_114858) do
+ActiveRecord::Schema.define(version: 2021_11_04_061035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 2021_11_02_114858) do
     t.datetime "end_date"
     t.text "locations", default: [], array: true
     t.datetime "registration_date"
-    t.integer "status"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status"
     t.index ["user_id"], name: "index_camps_on_user_id"
   end
 

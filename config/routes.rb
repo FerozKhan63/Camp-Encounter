@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :camps
+    resources :camps do
+      member do
+        patch :toggle_status
+      end
+    end
   end
   
   root to: "home#index"

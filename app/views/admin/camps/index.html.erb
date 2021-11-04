@@ -24,6 +24,7 @@
           <th><%= sortable "status" %></th>
           <th><%= sortable "registration_date", "Registration Date" %></th>
           <th>Actions</th>
+          <th>Status</th>
         </tr>
       </thead>
 
@@ -31,7 +32,7 @@
         <% @camps.each do |camp| %>
           <tr id="camp_<%= camp.id %>">
             <td><%= camp.name %></td>
-            <td><%= camp.locations %></td>
+            <td><%= camp.locations.each { |l| puts l.to_s } %></td>
             <td><%= camp.status %></td>
             <td><%= camp.registration_date %></td>
             <td>
@@ -39,6 +40,11 @@
               <%= link_to 'Edit', edit_admin_camp_path(camp), class: "btn btn-success", disabled: "true"%>
               <%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-danger"%>
             </td> 
+            <td>
+             <%= form_with(model: @camp, url: admin_camps_path) do |f| %>
+                <%= f.check_box :status, value: true  %>
+             <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

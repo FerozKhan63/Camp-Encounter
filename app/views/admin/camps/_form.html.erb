@@ -39,17 +39,26 @@
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-          <%= f.label :locations %><br />
-          <%= f.collection_check_boxes :locations, Camp::LOCATIONS, :to_s, :to_s %>
+          <%= f.label :registration_date %><br />
+          <%= f.date_field :registration_date, size: "10" %>
       </div>
+    </div>
+  </div>
+ 
+  <div class="col-md-6 mb-4">
+    <div class="form-check">
+        <%= f.label :locations, class: "form-check-label" %></br>
+        <%= f.collection_check_boxes :locations, Camp::LOCATIONS, :to_s, :to_s, class: "form-check-input" %><br>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-          <%= f.label :status %><br />
-          <%= f.select :status, ['active', 'inactive'], size: "10" %>
+          <%= f.radio_button :status, "active"  %>
+          <%= f.label :status , "Active", value: true%><br>
+          <%= f.radio_button :status, "inactive"  %>
+          <%= f.label :status ,"Inactive", value: false%>
       </div>
     </div>
   </div>
