@@ -3,7 +3,8 @@ require 'csv'
 class Camp < ApplicationRecord
   include PgSearch::Model
   
-  belongs_to :user, optional: true
+  has_many :enrolments
+  has_many :users, through: :enrolments, optional: true
  
   LOCATIONS = ['Kenya', 'Pakistan', "South Africa", "Egypt", "Alaska"].freeze
 

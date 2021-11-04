@@ -2,10 +2,12 @@ require 'csv'
 
 class User < ApplicationRecord
   include PgSearch::Model
+
   attr_accessor :skip_password_validation
 
   has_one_attached :profile_picture, dependent: :destroy
-  has_many :camps
+  has_many :enrolments
+  has_many :camps, through: :enrolment
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
@@ -15,6 +17,7 @@ class User < ApplicationRecord
   USER = :user
   SUPER_ADMIN = :superadmin
   ROLES = [USER, SUPER_ADMIN, ADMIN]
+
   enum role: ROLES, _default: :user
     
   validates :first_name, presence: true ,length: { minimum: 2 }, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
@@ -28,7 +31,7 @@ class User < ApplicationRecord
   private
 
   def self.to_csv
-    attributes = %w{id name email country country_code phone_number role }
+    attributes = %w{id name email country country_code phone_number role}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
