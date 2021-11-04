@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_061035) do
+ActiveRecord::Schema.define(version: 2021_11_04_122254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,17 +43,31 @@ ActiveRecord::Schema.define(version: 2021_11_04_061035) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "camp_locations", force: :cascade do |t|
+    t.bigint "camp_id"
+    t.bigint "location_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_id"], name: "index_camp_locations_on_camp_id"
+    t.index ["location_id"], name: "index_camp_locations_on_location_id"
+  end
+
   create_table "camps", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.text "locations", default: [], array: true
     t.datetime "registration_date"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "status"
     t.index ["user_id"], name: "index_camps_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

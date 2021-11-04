@@ -1,5 +1,4 @@
-<h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> New Camp</h2><hr>
-<%= form_with(model: @camp, url: admin_camps_path) do |f| %>
+<%= form_with(model: [:admin, @camp]) do |f| %>
   <% if @camp.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@camp.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -15,7 +14,7 @@
     <div class="col-md-6 mb-4">
       <div class="form-outline">
           <%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true, placeholder: "Nathia Gali", size:"30"%>
+          <%= f.text_field :name, autofocus: true, placeholder: "Nathia Gali", size:"30" %>
       </div>
     </div>
   </div>
@@ -47,18 +46,17 @@
  
   <div class="col-md-6 mb-4">
     <div class="form-check">
-        <%= f.label :locations, class: "form-check-label" %></br>
-        <%= f.collection_check_boxes :locations, Camp::LOCATIONS, :to_s, :to_s, class: "form-check-input" %><br>
+     <%= f.collection_check_boxes :camp_location_ids, Location.all, :id, :name %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-          <%= f.radio_button :status, "active"  %>
-          <%= f.label :status , "Active", value: true%><br>
+          <%= f.radio_button :status, "active" %>
+          <%= f.label :status , "Active", value: true %><br>
           <%= f.radio_button :status, "inactive"  %>
-          <%= f.label :status ,"Inactive", value: false%>
+          <%= f.label :status ,"Inactive", value: false %>
       </div>
     </div>
   </div>

@@ -14,6 +14,9 @@ class Admin::CampsController < AdminController
     end
   end
 
+  def show
+  end
+  
   def new
     @camp = Camp.new
 
@@ -21,6 +24,9 @@ class Admin::CampsController < AdminController
       format.js
       format.html 
     end 
+  end
+
+  def edit
   end
 
   def create
@@ -49,7 +55,7 @@ class Admin::CampsController < AdminController
   end
 
   def camp_params
-    params.require(:camp).permit(:name, :start_date, :end_date, :registration_date, :status, locations: [])
+    params.require(:camp).permit(:name, :start_date, :end_date, :registration_date, :status, camp_location_ids: [])
   end
   
   def sort_column
