@@ -3,8 +3,8 @@ require 'csv'
 class Camp < ApplicationRecord
   include PgSearch::Model
   
-  has_many :camp_locations
-  has_many :camps, through: :camp_locations
+  has_many :camp_locations, dependent: :destroy
+  has_many :locations, through: :camp_locations
  
   LOCATIONS = ['Kenya', 'Pakistan', "South Africa", "Egypt", "Alaska"].freeze
 

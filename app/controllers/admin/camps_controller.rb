@@ -16,7 +16,7 @@ class Admin::CampsController < AdminController
 
   def show
   end
-  
+
   def new
     @camp = Camp.new
 
@@ -31,7 +31,7 @@ class Admin::CampsController < AdminController
 
   def create
     @camp = Camp.new(camp_params)
-    @camp.locations = @camp.locations.reject(&:blank?)
+    # @camp.locations = @camp.locations.reject(&:blank?)
 
     if @camp.save
       redirect_to admin_camps_path
@@ -55,7 +55,7 @@ class Admin::CampsController < AdminController
   end
 
   def camp_params
-    params.require(:camp).permit(:name, :start_date, :end_date, :registration_date, :status, camp_location_ids: [])
+    params.require(:camp).permit(:name, :start_date, :end_date, :registration_date, :status, location_ids: [])
   end
   
   def sort_column
