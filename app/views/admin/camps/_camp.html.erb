@@ -1,6 +1,12 @@
 <tr id="camp_<%= camp.id %>">
   <td><%= camp.name %></td>
-  <td><%#= camp.locations.each { |l| puts l.to_s } %></td>
+  <td>
+    <div>
+      <% camp.locations.each do |location| %>
+        <%= location.name %>
+      <% end %>
+    </div>
+  </td>
   <td><%= camp.status %></td>
   <td><%= camp.registration_date %></td>
   <td>

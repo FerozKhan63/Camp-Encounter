@@ -31,7 +31,6 @@ class Admin::CampsController < AdminController
 
   def create
     @camp = Camp.new(camp_params)
-    # @camp.locations = @camp.locations.reject(&:blank?)
 
     if @camp.save
       redirect_to admin_camps_path

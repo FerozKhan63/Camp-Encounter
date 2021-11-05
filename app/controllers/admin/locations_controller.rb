@@ -10,7 +10,7 @@ class Admin::LocationsController < AdminController
     end
     respond_to do |format|
       format.html
-      format.csv { send_data Location.all.to_csv, filename: "Camps-#{Date.today}.csv" }
+      format.csv { send_data Location.all.to_csv, filename: "Locations-#{Date.today}.csv" }
     end
   end
 
