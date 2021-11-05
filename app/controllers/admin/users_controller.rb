@@ -10,7 +10,7 @@ class Admin::UsersController < AdminController
     end
     respond_to do |format|
       format.html
-      format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data User.all.to_csv, filename: "Users-#{Date.today}.csv" }
     end
   end
 

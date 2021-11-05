@@ -1,0 +1,22 @@
+<tr id="camp_<%= camp.id %>">
+  <td><%= camp.name %></td>
+  <td>
+    <div>
+      <% camp.locations.each do |location| %>
+        <%= location.name %>
+      <% end %>
+    </div>
+  </td>
+  <td><%= camp.status %></td>
+  <td><%= camp.registration_date %></td>
+  <td>
+    <%= link_to 'Show', admin_camp_path(camp), class: "btn btn-primary"%>
+    <%= link_to 'Edit', edit_admin_camp_path(camp), class: "btn btn-success", disabled: "true"%>
+    <%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-danger"%>
+  </td> 
+  <td>
+   <%= form_with(model: @camp, url: admin_camps_path) do |f| %>
+      <%= f.check_box :status, value: true  %>
+   <% end %>
+  </td>
+</tr>
