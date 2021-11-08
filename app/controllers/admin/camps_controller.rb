@@ -25,10 +25,7 @@ class Admin::CampsController < AdminController
       format.html 
     end 
   end
-
-  def edit
-  end
-
+  
   def create
     @camp = Camp.new(camp_params)
 
@@ -38,6 +35,16 @@ class Admin::CampsController < AdminController
       render 'new'
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @camp.update(camp_params)
+      render 'show'
+    end
+  end
+
 
   def destroy
     @camp.destroy

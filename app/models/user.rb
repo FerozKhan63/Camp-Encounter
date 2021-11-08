@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture, dependent: :destroy
   has_many :enrolments
-  has_many :camps, through: :enrolment
+  # has_one :active_camp, -> { where status: true }, class_name: "Camp", through: :enrolment
+  has_many :camps, through: :enrolments
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 

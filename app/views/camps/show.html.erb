@@ -1,0 +1,64 @@
+<%= render "layouts/formlayout" %>
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-lg-8 col-xl-6">
+    <div class="card rounded-3">
+      <div class="card-body p-4 p-md-5">
+
+        <p>
+            Welcome and thank you for applying to be a participant at CONNECT . CONNECT is an international programme 
+            for students ages 14 to 17 from around the world which takes place in partnership.
+        </p>
+        <p>
+            The purpose of this application is for the CONNECT Placement Team to get to know you and learn about your interests, 
+            passions, and motivations for registering. Before registering, we encourage you to visit our website and learn 
+            more about our offerings and the registration process.
+        </p>
+        <ul>
+          <p>This registration form is for both CONNECT camps that will take place during July 2022:</p>
+          <li>CONNECT Cycle A: 1:30 AM GMT to 7:30 AM GMT</li>
+          <li> CONNECT Cycle B: 11:30 AM GMT to 5:30 PM GMT</li>
+        </ul>
+        <p>
+            If you have any questions during the application process, please feel free to email  at info@campencounters.com.
+        </p>         
+        <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">Name</th>
+              <td><%= @camp.name %></td>
+            </tr>
+            <tr>
+              <th scope="row">Start Date</th>
+              <td><%= @camp.start_date %></td>
+            </tr>
+            <tr>
+              <th scope="row">End Date</th>
+              <td><%= @camp.end_date %></td>
+            </tr>
+            <tr>
+              <th scope="row">Locations</th>
+              <td>
+                <% @camp.locations.each do |location| %>
+                  <%= location.name %> 
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Registration Deadline</th>
+              <td><%= @camp.registration_date %></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <b>I ACKNOWLEDGE AND AGREE THAT ANY INFORMATION PROVIDED IN THIS APPLICATION WILL BE COLLECTED AND PROCESSED 
+            IN ACCORDANCE WITH THE 
+          </b>
+          <%= link_to "PRIVACY POLICY", "https://ge-stage-2019.herokuapp.com/privacy_policy" %>
+        </p>
+
+        <%= link_to "Start Application", start_entrolment_camp_path(@camp), class: "btn btn-success" %>
+
+      </div>
+    </div>
+  </div>
+</div>

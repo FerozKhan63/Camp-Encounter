@@ -34,6 +34,8 @@ gem 'pg_search'
 
 gem 'pagy'
 
+gem 'wicked'
+
 #Add  country to signup form
 gem 'country_select', '~> 6.0'
 

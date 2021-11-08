@@ -4,11 +4,11 @@ class Camp < ApplicationRecord
   include PgSearch::Model
 
   has_many :enrolments
-  has_many :users, through: :enrolments, optional: true
+  has_many :users, through: :enrolments
   has_many :camp_locations, dependent: :destroy
   has_many :locations, through: :camp_locations
 
-  AlPHABETS_ONLY = /\A[a-zA-Z]+\z/
+  AlPHABETS_ONLY = /\A[a-zA-Z_ ]+\z/
 
   pg_search_scope :global_search, against: [:name, :location], using: { tsearch: { prefix: true } }
   

@@ -46,16 +46,18 @@
  
   <div class="col-md-6 mb-4">
     <div class="form-check">
-     <%= f.collection_check_boxes :location_ids, Location.all, :id, :name %>
+     <%= f.collection_check_boxes(:location_ids, Location.all, :id, :name) do |b| %>
+       <%= b.label(class:"label-checkbox") { b.check_box + " " + b.text } %>
+     <% end %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-outline">
-          <%= f.radio_button :status, "active" %>
+          <%= f.radio_button :status, "1" %>
           <%= f.label :status , "Active", value: true %><br>
-          <%= f.radio_button :status, "inactive"  %>
+          <%= f.radio_button :status, "0" %>
           <%= f.label :status ,"Inactive", value: false %>
       </div>
     </div>

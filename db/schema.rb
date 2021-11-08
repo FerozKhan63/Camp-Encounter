@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_122254) do
+ActiveRecord::Schema.define(version: 2021_11_05_110541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,11 +57,18 @@ ActiveRecord::Schema.define(version: 2021_11_04_122254) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "registration_date"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "status"
-    t.index ["user_id"], name: "index_camps_on_user_id"
+  end
+
+  create_table "enrolments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "camp_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_id"], name: "index_enrolments_on_camp_id"
+    t.index ["user_id"], name: "index_enrolments_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|

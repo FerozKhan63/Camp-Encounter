@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.superadmin? 
       root_path
     elsif current_user.user? 
-      root_path
+      camps_path
     end
   end
 end
