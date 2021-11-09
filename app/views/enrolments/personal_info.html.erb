@@ -1,10 +1,12 @@
 <%= render 'layouts/formlayout'%>
 <div class="row d-flex justify-content-center align-items-center h-100">
   <div class="col-lg-8 col-xl-6">
+    <%= render "progress_bar", object: @progress %><br>
     <div class="card rounded-3">
       <div class="card-body p-4 p-md-5">
         <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Personal Information</h2><hr>
-        <%= form_with(model: @camp) do |f| %>
+        <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
+        <%= hidden_field_tag :enrolment_id, @enrolment.id %>
 
           <div class="row">
             <div class="col-md-6 mb-4">
@@ -26,20 +28,31 @@
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true, value: current_user.email, autocomplete: "email", size: "50" %>
           </div>
+          
+          <div class="form-outline mb-4">
+            <%= f.radio_button :gender, "Male" %>
+            <%= f.label :gender ,"Male" %>
+            <%= f.radio_button :gender, "Female" %>
+            <%= f.label :gender ,"Female" %>
+            <%= f.radio_button :gender, "Other" %>
+            <%= f.label :gender , "Other" %>
+          </div>
 
           <div class="form-outline mb-4">
-            <%= f.label :country %><br />
-            <%= f.country_select :country, autofocus: true, placeholder: "Pakistan" %>
+            <%= f.label :age  %><br>
+            <%= f.text_field :age, size: "5" %>
           </div>
-          
+
+            
           <div class="field">
             <%= f.label :phone_number %><br />
-            <%= f.text_field :country_code, autofocus: true, placeholder: '92', size: "7" %>
-            <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000" %>
+            <%= f.text_field :country_code, autofocus: true, value: current_user.country_code, size: "7" %>
+            <%= f.text_field :phone_number, autofocus: true, value: current_user.phone_number %>
           </div><br>
-          
+
           <div class="form-outline">
             <%= f.submit "Next", class: "btn btn-success" %>
+             <%= link_to "Skip", wizard_path(:camp_options, enrolment: @enrolment), class: "btn btn-info" %>
           </div>
         <% end %>
 

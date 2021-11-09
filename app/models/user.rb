@@ -6,7 +6,7 @@ class User < ApplicationRecord
   attr_accessor :skip_password_validation
 
   has_one_attached :profile_picture, dependent: :destroy
-  has_many :enrolments
+  has_many :enrolments, dependent: :destroy
   # has_one :active_camp, -> { where status: true }, class_name: "Camp", through: :enrolment
   has_many :camps, through: :enrolments
 

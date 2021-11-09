@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :camps do
-    post 'start_entrolment', on: :member
+    post 'start_enrolment', on: :member
   end
   resources :enrolments
 
@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     resources :camps
     resources :locations
   end
-
 
   root to: "home#index"
 end

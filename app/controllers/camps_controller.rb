@@ -1,5 +1,5 @@
 class CampsController < ApplicationController
-  before_action :set_camp, only: %i[show edit update destroy start_entrolment]
+  before_action :set_camp, only: %i[show edit update destroy start_enrolment]
   before_action :authenticate_user!
   
   def index
@@ -18,21 +18,9 @@ class CampsController < ApplicationController
     end
   end
 
-  def start_entrolment
-    byebug
+  def start_enrolment
     @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
-  end
-
-  def edit; end
-
-  def create
-    @camp = Camp.new(camp_params)
-
-    if @camp.save
-      redirect_to camps_path
-    else
-      render 'new'
-    end
+    redirect_to enrolment_path(:personal_info, enrolment: @enrolment)
   end
 
   def update
