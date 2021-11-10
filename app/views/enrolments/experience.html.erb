@@ -6,12 +6,12 @@
       <div class="card-body p-4 p-md-5">
         <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Experience</h2><hr>
         <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
-        <%= hidden_field_tag :enrolment_id, @enrolment.id %>
+          <%= hidden_field_tag :submitted, "1" %>
           <h5>Please briefly mention if you have any prior camping experience</h5><hr>
           
           <div class="form-outline mb-4">
-            <%= f.label :experiece %>
-            <%= f.text_area :experiece %>
+            <%= f.label :experience %>
+            <%= f.text_area :experience %>
           </div>
           
           <div class="form-outline">
