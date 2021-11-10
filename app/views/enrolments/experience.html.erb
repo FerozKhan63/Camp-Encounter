@@ -10,14 +10,13 @@
           <h5>Please briefly mention if you have any prior camping experience</h5><hr>
           
           <div class="form-outline mb-4">
-            <%= f.label :experience %>
             <%= f.text_area :experience %>
           </div>
           
           <div class="form-outline">
             <%= link_to "Previous", previous_wizard_path(enrolment: @enrolment), class: "btn btn-success" %>
             <% if @enrolment.progress >=90 %>
-              <%= f.submit "Submit Application", class: "btn btn-success" %>
+              <%= f.submit "Submit Application", data: { confirm: 'Are you sure? You wont be able to edit application after submission' }, class: "btn btn-success" %>
             <% else %>
               <%= link_to "Go to Dashboard", wizard_path(:dashboard), class: "btn btn-success" %>
             <% end %>
