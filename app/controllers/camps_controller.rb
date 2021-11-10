@@ -21,7 +21,11 @@ class CampsController < ApplicationController
   def start_enrolment
     @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
     session[:enrolment_id] = @enrolment.id
-    redirect_to enrolment_path(:personal_info)
+    if @enrolment.progress == 0
+      redirect_to enrolment_path(:personal_info)
+    else
+      redirect_to enrolment_path(:dashboard)
+    end
   end
 
   def update

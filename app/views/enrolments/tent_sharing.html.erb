@@ -8,8 +8,10 @@
         <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
    
           <div class="form-outline mb-4">
-            <%= f.label :tent_sharing  %>
-            <%= f.select :tent_sharing, ['Single', 'Double'] %>
+            <%= f.radio_button :tent_sharing, "true" %>
+            <%= f.label :tent_sharing , "Double" %>
+            <%= f.radio_button :tent_sharing, "false" %>
+            <%= f.label :tent_sharing , "Single" %>
           </div>
           
           <div class="form-outline">

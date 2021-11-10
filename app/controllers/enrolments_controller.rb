@@ -3,9 +3,9 @@ class EnrolmentsController < ApplicationController
 
   before_action :set_enrolment
   # before_action :check_completion_status
-  before_action :progress_bar, only: [:show, :edit]
+  after_action :progress_bar, only: [:update]
 
-  steps :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
+  steps :dashboard, :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
   :cnic, :address, :experience
 
   def show
@@ -18,7 +18,7 @@ class EnrolmentsController < ApplicationController
         @enrolment.update(enrolment_params)
       when :camp_options
         @enrolment.update(enrolment_params)
-      when :tent_shraing
+      when :tent_sharing
         @enrolment.update(enrolment_params)
       when :emergency_contact
         @enrolment.update(enrolment_params)
@@ -42,7 +42,7 @@ class EnrolmentsController < ApplicationController
 
   def progress_bar
     if wizard_steps.any? && wizard_steps.index(step).present?
-      @enrolment.progress = ((wizard_steps.index(step) + 1).to_d / wizard_steps.count.to_d) * 100 
+      @enrolment.progress = ((wizard_steps.index(step)+1).to_d / wizard_steps.count.to_d) * 100 
       @enrolment.save
     end
   end
@@ -56,10 +56,10 @@ class EnrolmentsController < ApplicationController
     :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
   end
 
-  # def check_completion_status
-  #   if params[:id]="wicked_finished" && @enrolment.progress >= 90
-  #     render 'confirmation_model'
-  #   end
-  # end
+  def check_completion_status
+    if @enrolment.submitted && @enrolment.progress >= 90
+      render 'confirmation_modal'
+    end
+  end
 
 end

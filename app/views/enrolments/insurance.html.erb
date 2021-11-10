@@ -8,9 +8,9 @@
         <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
    
           <div class="form-outline mb-4">
-            <%= f.radio_button :insurance, "1" %>
+            <%= f.radio_button :insurance, "true" %>
             <%= f.label :insurance , "Yes" %>
-            <%= f.radio_button :insurance, "0" %>
+            <%= f.radio_button :insurance, "false" %>
             <%= f.label :insurance , "No" %>
           </div>
 
