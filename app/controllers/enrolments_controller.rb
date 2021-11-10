@@ -5,7 +5,7 @@ class EnrolmentsController < ApplicationController
   # before_action :check_completion_status
   after_action :progress_bar, only: [:update]
 
-  steps :dashboard, :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
+  steps :view_application, :dashboard, :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
   :cnic, :address, :experience
 
   def show
@@ -34,6 +34,7 @@ class EnrolmentsController < ApplicationController
         @enrolment.update(enrolment_params)
       when :experience
         @enrolment.update(enrolment_params)
+        jump_to(:dashboard)
      end
     render_wizard @enrolment
   end 

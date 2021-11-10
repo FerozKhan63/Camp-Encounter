@@ -16,7 +16,11 @@
           
           <div class="form-outline">
             <%= link_to "Previous", previous_wizard_path(enrolment: @enrolment), class: "btn btn-success" %>
-            <%= f.submit "Submit Application", class: "btn btn-success",data-bs-toggle "modal", data-bs-target:"#exampleModal" %>
+            <% if @enrolment.progress >=90 %>
+              <%= f.submit "Submit Application", class: "btn btn-success" %>
+            <% else %>
+              <%= link_to "Go to Dashboard", wizard_path(:dashboard), class: "btn btn-success" %>
+            <% end %>
           </div>
 
         <% end %>
