@@ -2,7 +2,6 @@ class EnrolmentsController < ApplicationController
   include Wicked::Wizard
 
   before_action :set_enrolment
-  # before_action :check_completion_status
   after_action :progress_bar, only: [:update]
 
   steps :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
@@ -55,12 +54,6 @@ class EnrolmentsController < ApplicationController
   def enrolment_params
    params.require(:enrolment).permit(:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, :cnic, 
     :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
-  end
-
-  def check_completion_status
-    if @enrolment.submitted && @enrolment.progress >= 90
-      render 'confirmation_modal'
-    end
   end
 
 end

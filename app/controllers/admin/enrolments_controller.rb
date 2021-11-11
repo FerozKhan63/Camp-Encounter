@@ -1,11 +1,11 @@
 class Admin::EnrolmentsController < AdminController
   before_action :set_enrolment, only: %i[ show edit update destroy ]
-  # before_action :set_user, only: %i[ index show edit update destroy ]
   
   def index
     @pagy, @enrolments = pagy(Enrolment.all, items: 3)
-    # @enrolment = Enrolment.find(params[:id])
-    # @user = User.find_by(id: @enrolment.user_id) 
+    @enrolment = Enrolment.pluck(:user_id)
+    @users = User.find(@enrolment)
+
     respond_to do |format|
       format.html
       format.csv { send_data Enrolment.all.to_csv, filename: "enrolments-#{Date.today}.csv" }

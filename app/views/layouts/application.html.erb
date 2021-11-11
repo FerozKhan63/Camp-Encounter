@@ -12,6 +12,7 @@
 
   <body>
     <%= render 'shared/navbar' %>
+    <%= render 'shared/flash', resource: flash[:notice] %>
         <%= yield %>
   </body>
 </html>

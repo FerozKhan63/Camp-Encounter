@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       root_path
     elsif current_user.user? 
       if current_user.enrolments.any?
-        enrolments_path
+        root_path
       else
         camps_path
       end

@@ -5,7 +5,7 @@
     <div class="card rounded-3">
       <div class="card-body p-4 p-md-5">
         <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Experience</h2><hr>
-        <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
+        <%= form_with(model: @enrolment, local: false, method: :put, url: wizard_path) do |f| %>
           <%= f.hidden_field :submitted, value: "true" %>
           <h5>Please briefly mention if you have any prior camping experience</h5><hr>
           
@@ -16,9 +16,12 @@
           <div class="form-outline">
             <%= link_to "Previous", previous_wizard_path(enrolment: @enrolment), class: "btn btn-success" %>
             <% if @enrolment.progress >=90 %>
-              <%= f.submit "Submit Application", data: { confirm: 'Are you sure? You wont be able to edit application after submission' }, class: "btn btn-success" %>
+              <%= render 'confirmation_modal' , f: f %>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Submit Application
+              </button>
             <% else %>
-              <%= link_to "Go to Dashboard", wizard_path(:dashboard), class: "btn btn-success" %>
+              <%= link_to "Go to Dashboard", wizard_path(:dashboard), data: {bs_toggle: 'modal', bs_target: '#exampleModal', remote: true}, class: "btn btn-success" %>        
             <% end %>
           </div>
 
