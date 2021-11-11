@@ -1,5 +1,5 @@
 class Admin::CampsController < AdminController
-  before_action :set_camp, only: %i[ show edit update destroy ]
+  before_action :set_camp, only: %i[ show edit update destroy toggle_status ]
   helper_method :sort_column, :sort_direction
   
   def index
@@ -52,6 +52,16 @@ class Admin::CampsController < AdminController
     respond_to do |format|
       format.js
     end  
+  end
+
+  def toggle_status
+    if @camp.status == true
+      @camp.status = false
+    else 
+      @camp.status = true
+    end
+    @camp.save
+    redirect_to admin_camps_path
   end
 
   private

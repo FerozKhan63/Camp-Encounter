@@ -1,0 +1,42 @@
+<div class="card rounded-3">
+  <div class="card-body">
+    <h1>User Applications</h1>
+    <hr>
+    
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Progress</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @enrolments.each do |enrolment| %>
+          <tr id="enrolment_<%= enrolment.id %>">
+            <td><%= enrolment.id %></td>
+            <td><%= "#{enrolment.progress}%" %></td>
+            <td>
+              <% if enrolment.progress < 100 %>
+                <p>In Progress</p>
+              <% else %>
+                <p>Completed</p>
+              <% end %>
+            </td>
+            <td>
+              <% if enrolment.progress >= 100 %>
+                <%= link_to 'Show', admin_enrolment_path(enrolment), class: "btn btn-success", disabled: "true"%>
+                <%= link_to 'Edit', edit_admin_enrolment_path(enrolment), class: "btn btn-success", disabled: "true"%>
+              <% end %>
+              <%= link_to 'Delete', admin_enrolment_path(enrolment), method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-danger"%>
+            </td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table><br>
+    <p><%= link_to("Generate Report", admin_locations_path(format: :csv), class: "btn btn-success",) %></p>
+    <%= pagy_bootstrap_nav(@pagy).html_safe %> 
+  <div>
+<div>
