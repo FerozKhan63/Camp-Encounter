@@ -5,8 +5,8 @@ class EnrolmentsController < ApplicationController
   # before_action :check_completion_status
   after_action :progress_bar, only: [:update]
 
-  steps :view_application, :dashboard, :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
-  :cnic, :address, :experience
+  steps :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
+  :cnic, :address, :experience, :view_application, :dashboard
 
   def show
     render_wizard
@@ -43,7 +43,7 @@ class EnrolmentsController < ApplicationController
 
   def progress_bar
     if wizard_steps.any? && wizard_steps.index(step).present?
-      @enrolment.progress = ((wizard_steps.index(step)+1).to_d / wizard_steps.count.to_d) * 100 
+      @enrolment.progress = ((wizard_steps.index(step) + 2).to_d / (wizard_steps.count.to_d - 1)) * 100 
       @enrolment.save
     end
   end
