@@ -9,15 +9,6 @@ class CampsController < ApplicationController
   def show
   end
 
-  def new
-    @camp = Camp.new
-
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
-
   def start_enrolment
     @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
     session[:enrolment_id] = @enrolment.id
@@ -26,20 +17,6 @@ class CampsController < ApplicationController
     else
       redirect_to enrolment_path(:dashboard)
     end
-  end
-
-  def update
-    if @camp.update(camp_params)
-      render 'show'
-    end
-  end
-
-  def destroy
-    @camp.destroy
-
-    respond_to do |format|
-      format.js
-    end  
   end
 
   private
