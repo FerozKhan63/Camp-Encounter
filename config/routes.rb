@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :enrolments, only: [:index, :show, :create, :update, :destroy]
+    namespace :v1 do
+      resources :enrolments, only: [:index, :show, :create, :update, :destroy]
+    end
   end
 
   root to: "home#index"
