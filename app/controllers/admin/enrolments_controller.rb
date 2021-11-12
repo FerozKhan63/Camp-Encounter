@@ -16,8 +16,7 @@ class Admin::EnrolmentsController < AdminController
     @user = User.find_by(id: @enrolment.user_id) 
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @enrolment.update(enrolment_params)
@@ -40,7 +39,7 @@ class Admin::EnrolmentsController < AdminController
   end
 
   def enrolment_params
-    params.require(:enrolment).permit(:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, :cnic, 
-    :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
+    params.require(:enrolment).permit((:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, :cnic, 
+      :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
   end
 end

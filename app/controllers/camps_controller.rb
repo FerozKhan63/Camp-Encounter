@@ -1,6 +1,7 @@
 class CampsController < ApplicationController
   before_action :set_camp, only: %i[show edit update destroy start_enrolment]
   before_action :authenticate_user!
+  before_action :check_date, only: [:start_enrolment]
   
   def index
     @camps = Camp.all
@@ -23,6 +24,12 @@ class CampsController < ApplicationController
   
   def set_camp
     @camp = Camp.find(params[:id])
+  end
+
+  def check_date
+    if @camp.start_date < Time.now
+      redirect_to camps_path, alert: "This camp has already started, please select another camp"
+    end
   end
 
   def camp_params
