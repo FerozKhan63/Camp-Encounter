@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :camps
+    resources :camps do
+      member do
+        get :toggle_status
+      end
+    end
     resources :locations
   end
   
