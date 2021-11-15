@@ -4,6 +4,7 @@
     <%= render "progress_bar", object: @progress %><br>
     <div class="card rounded-3">
       <div class="card-body p-4 p-md-5">
+        <h2><%= @enrolment.camp.name %></h2>
         <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"><%= "You have completed #{@enrolment.progress}% of your application." %></h2><hr>
         
         <% if @enrolment.progress < 100 %>

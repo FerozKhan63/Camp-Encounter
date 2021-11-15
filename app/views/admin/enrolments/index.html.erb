@@ -6,7 +6,9 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>App ID</th>
+          <th>Name</th>
+          <th>Email</th>
           <th>Progress</th>
           <th>Status</th>
           <th>Actions</th>
@@ -17,6 +19,8 @@
         <% @enrolments.each do |enrolment| %>
           <tr id="enrolment_<%= enrolment.id %>">
             <td><%= enrolment.id %></td>
+            <td><%= "#{enrolment.user.first_name} #{enrolment.user.last_name}" %></td>
+            <td><%= enrolment.user.email %></td>
             <td><%= "#{enrolment.progress}%" %></td>
             <td>
               <% if enrolment.progress < 100 %>
