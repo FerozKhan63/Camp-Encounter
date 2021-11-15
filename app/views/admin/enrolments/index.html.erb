@@ -2,7 +2,6 @@
   <div class="card-body">
     <h1>User Applications</h1>
     <hr>
-    
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -27,7 +26,7 @@
             </td>
             <td>
               <% if enrolment.progress >= 100 %>
-                <%= link_to 'Show', admin_enrolment_path(enrolment), class: "btn btn-success", disabled: "true"%>
+                <%= link_to 'Show', admin_enrolment_path(enrolment), class: "btn btn-primary", disabled: "true"%>
                 <%= link_to 'Edit', edit_admin_enrolment_path(enrolment), class: "btn btn-success", disabled: "true"%>
               <% end %>
               <%= link_to 'Delete', admin_enrolment_path(enrolment), method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-danger"%>
