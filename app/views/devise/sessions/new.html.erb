@@ -1,0 +1,47 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-lg-8 col-xl-6">
+    <div class="card rounded-3">
+      <div class="card-body p-4 p-md-5">
+        <h3 class="text-uppercase text-center mb-5">Welcome to Global Encounters</h3>        
+        <h5 class="text-uppercase text-center mb-5">Please Sign in or create an account</h5>
+        
+        <% flash.each do |type, msg| %>
+            <%= content_tag :div, msg, class: build_alert_classes(type) %>
+        <% end %>
+        <hr>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <center>
+            <div class="form-outline mb-4">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", size: "50", required: true %>
+            </div>
+
+            <div class="form-outline mb-4">
+              <%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "current-password", size: "50" %>
+            </div>
+          </center>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="form-outline mb-4">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+          <div class="d-grid gap-2">
+            <%= f.submit "Log in",class: "btn btn-success", size: "50" %>
+            <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+          </div>
+          
+          <hr value= "OR">
+          <div class="d-grid gap-2">
+            <%= link_to "Sign Up", new_registration_path(resource_name),class: "btn btn-success" %>
+            <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+          </div>
+        <% end %>
+      <div>
+    <div>
+  <div>
+<div>
