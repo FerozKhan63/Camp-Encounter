@@ -8,6 +8,10 @@ class CampsController < ApplicationController
   end
 
   def show
+    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
+    if @enrolment.progress > 0
+      start_enrolment
+    end
   end
 
   def start_enrolment
