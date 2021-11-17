@@ -2,20 +2,19 @@ class CampsController < ApplicationController
   before_action :set_camp, only: %i[show edit update destroy start_enrolment]
   before_action :authenticate_user!
   before_action :check_date, only: [:start_enrolment]
+  before_action :set_enrolment, only: [:show, :start_enrolment]
   
   def index
     @camps = Camp.all
   end
 
   def show
-    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
     if @enrolment.progress > 0
       start_enrolment
     end
   end
 
   def start_enrolment
-    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
     session[:enrolment_id] = @enrolment.id
     if @enrolment.progress == 0
       redirect_to enrolment_path(:personal_info)
@@ -28,6 +27,10 @@ class CampsController < ApplicationController
   
   def set_camp
     @camp = Camp.find(params[:id])
+  end
+
+  def set_enrolment
+    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
   end
 
   def check_date
