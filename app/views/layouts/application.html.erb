@@ -12,6 +12,11 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <%= yield %>
+    <%= render 'shared/flash', resource: flash[:notice] %>
+    <section class="h-100 h-custom">
+      <div class="container py-5 h-100">
+        <%= yield %>
+      <div>
+    <section>
   </body>
 </html>
