@@ -1,46 +1,5 @@
 class UsersController < Devise::RegistrationsController
-  before_action :set_user, only: %i[ show update destroy ]
-
-  def index
-    if params[:query].present?
-      @users = User.global_search(params[:query]).order(created_at: :asc)
-    else
-      @users = User.order(created_at: :asc)
-    end
-    @pagy, @users = pagy(@users, items: 3)
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
-    end
-  end
-
-  def new
-    @user = User.new
-
-    respond_to do |format|
-      format.js
-      format.html 
-    end 
-  end
-  
-  def create
-    @user = User.new(user_params)
-    @user.skip_password_validation = true
-    @user.skip_confirmation!
-  
-    raw, enc = Devise.token_generator.generate(User, :reset_password_token)
-    @user.reset_password_token = enc
-    @user.reset_password_sent_at = Time.current
-
-    if @user.save
-      UserMailer.send_invite_email(@user,raw).deliver
-      redirect_to users_path, notice: "An invitation has been sent to the user!"
-    else
-      flash.now[:error] = "There are some errors in the provided details. Please resubmit the form with the correct details."
-      render :new
-    end
-  end
+  before_action :set_user, only: %i[ show ]
 
   def show
     respond_to do |format|
@@ -53,10 +12,5 @@ class UsersController < Devise::RegistrationsController
 
   def set_user
     @user = current_user
-  end
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :country_code, :phone_number, :country, :country_select, 
-      :role, :password, :password_confirmation, :profile_picture)
   end
 end
