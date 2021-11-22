@@ -38,8 +38,9 @@ class User < ApplicationRecord
   end
 
   def password_required?
-      return false if skip_password_validation
-      super
+    return false if skip_password_validation
+    
+    super
   end
 
   def name
