@@ -1,0 +1,38 @@
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td><%= "#{@user.first_name} #{@user.last_name}" %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td><%= @user.email %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number</th>
+                  <td><%= "#{@user.country_code} #{@user.phone_number}" %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Country</th>
+                  <td><%= @user.country %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Role</th>
+                  <td><%= @user.role %></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
