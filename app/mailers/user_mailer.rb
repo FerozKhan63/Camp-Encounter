@@ -3,5 +3,5 @@ class UserMailer < ApplicationMailer
     @user = user 
     @token = raw
     mail( to: @user.email, subject: 'Welcome to Encounters!')
-    end 
- end
+  end 
+end
