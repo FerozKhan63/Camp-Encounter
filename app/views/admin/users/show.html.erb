@@ -4,12 +4,14 @@
       <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3">
           <div class="card-body p-4 p-md-5">
+
             <center>
               <% if @user.profile_picture.attached? %>
                 <%= image_tag @user.profile_picture, size: "220x220" %>
               <% end %>
-            </center><hr>
-
+            </center> 
+            <hr>
+              
             <table class="table">
               <tbody>
                 <tr>
@@ -35,7 +37,8 @@
               </tbody>
             </table>
 
-            <%= link_to "Edit", user_edit_path, class: "btn btn-success" %>
+            <%= link_to "Edit", edit_admin_user_path, class: "btn btn-success" %>
+
           </div>
         </div>
       </div>

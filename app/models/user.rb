@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   attr_accessor :skip_password_validation
 
+  has_one_attached :profile_picture, dependent: :destroy
+
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
@@ -21,7 +23,10 @@ class User < ApplicationRecord
     
   validates :first_name, :country, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
   validates :phone_number, uniqueness: true, format: { with: PHONE_REGEX , message: " must be in xxx-xxx-xxxx format." }
-  validates :password, format: { with: PASSWORD_REGEX, message: "must contain at least (1) special characters. Password must contain at least (1) uppercase letter. Password must be at least 7 characters long." }
+  validates :password, format: {
+    with: PASSWORD_REGEX,
+    message: "must contain at least (1) special character and uppercase letter."
+  }, if: :password_required?
   validates :country_code, presence: true, length: { minimum: 2 }
   validates :terms_of_service , acceptance: { message: 'If you do not agree to the terms and service please contact global@campencounter.com' }
   

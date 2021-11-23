@@ -13,6 +13,7 @@
                 <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
               </div>
 
+
               <div class="form-outline mb-4">
                 <%= f.submit "Reset password", class: "btn btn-success w-auto" %>
                 <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-success w-auto" %>
@@ -21,9 +22,10 @@
             
             <center>
               <div class="form-outline mb-4">
-                <a href = https://ge-stage-2019.herokuapp.com/privacy_policy >Privacy Policy</a> | <a>Terms of service</a>
+                <a><%= link_to "Privacy Policy", privacy_policy_url %></a> | <a>Terms of service</a>
               </div> 
             </center>
+
           <div>
         <div>
       <div>
