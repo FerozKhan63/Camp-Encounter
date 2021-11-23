@@ -10,53 +10,53 @@
 
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <div>
                       <%= f.label :first_name %><br />
-                      <%= f.text_field :first_name, autofocus: true, placeholder: "John", size:"25" %>
+                      <%= f.text_field :first_name, autofocus: true, placeholder: "John", class: "form-control mb-1"  %>
                   </div>
                 </div>
 
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <div>
                     <%= f.label :last_name %><br />
-                    <%= f.text_field :last_name, autofocus: true, placeholder: "Doe", size: "25" %>
+                    <%= f.text_field :last_name, placeholder: "Doe", class: "form-control mb-1"  %>
                   </div>
                 </div>
               </div>
 
-              <div class="form-outline mb-4">
+              <div>
                   <%= f.label :email %><br />
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", size: "60" %>
+                  <%= f.email_field :email, autocomplete: "email", class: "form-control mb-2" %>
               </div>
               
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <div>
                     <%= f.label :password %>
                     <% if @minimum_password_length %>
                     <em>(<%= @minimum_password_length %> characters minimum)</em>
                     <% end %><br />
-                    <%= f.password_field :password, autocomplete: "new-password", size:"25" %>
+                    <%= f.password_field :password, autocomplete: "new-password", class: "form-control mb-1"  %>
                   </div>
 
                 </div>
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <div>
                     <%= f.label :password_confirmation %><br />
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password", size:"25" %>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control mb-1"  %>
                   </div>
                 </div>
               </div>
 
-              <div class="form-outline mb-4">
+              <div>
                 <%= f.label :country %><br />
-                <%= f.country_select :country, autofocus: true, placeholder: "Pakistan" %>
+                <%= f.country_select :country, {}, class: 'form-control' %>
               </div>
               
               <div class="field">
                 <%= f.label :phone_number %><br />
-                <%= f.text_field :country_code, autofocus: true, placeholder: '92', size: "7" %>
-                <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000" %>
+                <%= f.text_field :country_code, placeholder: '92', class: "form-control-sm mb-1" %>
+                <%= f.text_field :phone_number, placeholder: "323-555-0000", class: "form-control mb-3"  %>
               </div>
               
               <br>
@@ -78,7 +78,7 @@
               <br><br>
               
               <div class="actions">
-                <%= f.submit "Sign up" %>
+                <%= f.submit "Sign up", class: "btn btn-success" %>
               </div>
             <% end %>
             <br>
