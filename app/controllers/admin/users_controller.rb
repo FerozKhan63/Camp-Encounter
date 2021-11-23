@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[show edit update destroy]
 
   def index
     if params[:query].present?
@@ -49,8 +49,7 @@ class Admin::UsersController < AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -71,6 +70,9 @@ class Admin::UsersController < AdminController
 
   def set_user
     @user = User.find(params[:id])
+    if !@user.valid?
+      redirect_to root_path
+    end
   end
 
   def user_params
