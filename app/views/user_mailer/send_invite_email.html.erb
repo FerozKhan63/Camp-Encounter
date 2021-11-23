@@ -1,0 +1,10 @@
+<p>
+  <%= "Welcome #{@user.first_name}" %>
+</p>
+
+You have been invited to a part of the global encounters family. Please click the link below to accept the invitation.
+
+<p>
+  <%= link_to 'Set my password', edit_password_url(@user, reset_password_token: @token)%>
+</p>
+
