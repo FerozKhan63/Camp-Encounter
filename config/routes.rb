@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     end
     resources :locations
   end
+
+  direct :privacy_policy do
+    "https://ge-stage-2019.herokuapp.com/privacy_policy"
+  end
   
   root to: "home#index"
 end

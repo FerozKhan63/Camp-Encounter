@@ -1,94 +1,91 @@
-<%= render "layouts/formlayout" %>
-<div class="row d-flex justify-content-center align-items-center h-100">
-  <div class="col-lg-8 col-xl-6">
-    <div class="card rounded-3">
-      <div class="card-body p-4 p-md-5">
-        <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Edit My Profile</h2>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
-          
-          <center>
-            <% if @user.profile_picture.attached? %>
-              <%= image_tag @user.profile_picture, size: "220x220" %>
-            <% end %>
-          </center> 
-          <hr>
-          
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <div class="form-outline">
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Edit My Profile</h2>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+              
+              <center>
+                <% if @user.profile_picture.attached? %>
+                  <%= image_tag @user.profile_picture, size: "220x220" %>
+                <% end %>
+              </center> 
+              <hr>
+              
+              <div class="row">
+                <div class="col-md-6 mb-4">
                   <%= f.label :profile_picture %><br/>
                   <%= f.file_field :profile_picture %>
               </div>
-          </div>
 
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <div class="form-outline">
+              <div class="row">
+                <div class="col-md-6 mb-4">
                   <%= f.label :first_name %><br />
-                  <%= f.text_field :first_name, autofocus: true, placeholder: "John", size:"25" %>
+                  <%= f.text_field :first_name, autofocus: true, placeholder: "John", class: "form-control mb-1" %>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <%= f.label :last_name %><br />
+                  <%= f.text_field :last_name, placeholder: "Doe", class: "form-control mb-1" %>
+                </div>
               </div>
-            </div>
 
-            <div class="col-md-6 mb-4">
-              <div class="form-outline">
-                <%= f.label :last_name %><br />
-                <%= f.text_field :last_name, autofocus: true, placeholder: "Doe", size: "25" %>
+              <div>
+                <%= f.label :country %><br />
+                <%= f.country_select :country, {}, class: 'form-control' %>
               </div>
-            </div>
-          </div>
+              
+              <div>
+                <%= f.label :phone_number %><br />
+                <%= f.text_field :country_code, placeholder: '92', class: "form-control-sm mb-1" %>
+                <%= f.text_field :phone_number, placeholder: "323-555-0000", class: "form-control mb-1" %>
+              </div>
+              
 
-          <div class="form-outline mb-4">
-            <%= f.label :country %><br />
-            <%= f.country_select :country, autofocus: true, placeholder: "Pakistan" %>
-          </div>
-          
-          <div class="form-outline mb-4">
-            <%= f.label :phone_number %><br />
-            <%= f.text_field :country_code, autofocus: true, placeholder: '92', size: "7" %>
-            <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000" %>
-          </div>
-          
+              <div>
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autocomplete: "email", class: "form-control mb-1" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", size: "25" %>
-          </div>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
+              <div>
+                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                <%= f.password_field :password, autocomplete: "new-password", class: "form-control mb-1" %>
+                <% if @minimum_password_length %>
+                  <br />
+                  <em><%= @minimum_password_length %> characters minimum</em>
+                <% end %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
-            <% if @minimum_password_length %>
-              <br />
-              <em><%= @minimum_password_length %> characters minimum</em>
+              <div>
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control mb-1" %>
+              </div>
+
+              <div>
+                <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control mb-1" %>
+              </div>
+              <br>
+              <div class="form-outline mb-4">
+                <%= f.submit "Update" , class: "btn btn-success"%>
+              </div>
             <% end %>
+
+            <h3>Cancel my account</h3>
+
+            <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+            <%= link_to "Back", :back %>
           </div>
-
-          <div class="form-outline mb-4">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-          </div>
-
-          <div class="form-outline mb-4">
-            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-            <%= f.password_field :current_password, autocomplete: "current-password" %>
-          </div>
-          <br>
-          <div class="form-outline mb-4">
-            <%= f.submit "Update" , class: "btn btn-success"%>
-          </div>
-        <% end %>
-
-        <h3>Cancel my account</h3>
-
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-        <%= link_to "Back", :back %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

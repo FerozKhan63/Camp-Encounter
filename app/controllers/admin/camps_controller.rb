@@ -1,13 +1,15 @@
 class Admin::CampsController < AdminController
-  before_action :set_camp, only: %i[ show edit update destroy toggle_status]
+  before_action :set_camp, only: %i[show edit update destroy toggle_status]
   helper_method :sort_column, :sort_direction
   
   def index
     if params[:query].present?
-      @pagy, @camps = pagy(Camp.global_search(params[:query]).order(sort_column + " " + sort_direction), items: 3)
+      @camps = Camp.global_search(params[:query]).order(sort_column + " " + sort_direction)
     else
-      @pagy, @camps = pagy(Camp.order(sort_column + " " + sort_direction), items: 3)
+      @camps = Camp.order(sort_column + " " + sort_direction)
     end
+    @pagy, @camps = pagy(@camps, items: 3)
+
     respond_to do |format|
       format.html
       format.csv { send_data Camp.all.to_csv, filename: "Camps-#{Date.today}.csv" }
@@ -56,7 +58,6 @@ class Admin::CampsController < AdminController
     @camp.save
     redirect_to admin_camps_path
   end
-
 
   private
   

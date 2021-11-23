@@ -1,5 +1,5 @@
 class UsersController < Devise::RegistrationsController
-  before_action :set_user, only: %i[ show update destroy ]
+  before_action :set_user, only: %i[show]
 
   def show
     respond_to do |format|
@@ -12,10 +12,5 @@ class UsersController < Devise::RegistrationsController
 
   def set_user
     @user = current_user
-  end
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :country_code, :phone_number, :country, :country_select, 
-      :role, :password, :password_confirmation, :profile_picture)
   end
 end

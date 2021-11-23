@@ -4,10 +4,12 @@ class Admin::LocationsController < AdminController
 
   def index 
     if params[:query].present?
-      @pagy, @locations = pagy(Location.global_search(params[:query]).order(sort_column + " " + sort_direction), items: 3)
+      @locations = Location.global_search(params[:query]).order(sort_column + " " + sort_direction)
     else
-      @pagy, @locations = pagy(Location.order(sort_column + " " + sort_direction), items: 3)
+      @locations = Location.order(sort_column + " " + sort_direction)
     end
+    @pagy, @locations = pagy(@locations, items: 3)
+
     respond_to do |format|
       format.html
       format.csv { send_data Location.all.to_csv, filename: "Locations-#{Date.today}.csv" }
@@ -29,8 +31,7 @@ class Admin::LocationsController < AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @location.update(location_params)
