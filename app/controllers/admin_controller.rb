@@ -6,7 +6,7 @@ class AdminController < ApplicationController
 
   def admin_only
     if current_user.user?
-        redirect_to root_path, alert: "You need to be admin"
+      redirect_to root_path, alert: "You need to be admin"
     end
   end
 end

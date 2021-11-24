@@ -1,41 +1,42 @@
-<%= render "layouts/formlayout" %>
-<div class="row d-flex justify-content-center align-items-center h-100">
-  <div class="col-lg-8 col-xl-6">
-    <div class="card rounded-3">
-      <div class="card-body p-4 p-md-5">
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-lg-8 col-xl-6">
+      <div class="card rounded-3">
+        <div class="card-body p-4 p-md-5">
 
-        <table class="table">
-          <tbody>
-            <tr>
-              <th scope="row">Name</th>
-              <td><%= @camp.name %></td>
-            </tr>
-            <tr>
-              <th scope="row">Start Date</th>
-              <td><%= @camp.start_date %></td>
-            </tr>
-            <tr>
-              <th scope="row">End Date</th>
-              <td><%= @camp.end_date %></td>
-            </tr>
-            <tr>
-              <th scope="row">Locations</th>
-              <td>
-                <% @camp.locations.each do |location| %>
-                  <%= location.name %> 
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Registration Deadline</th>
-              <td><%= @camp.registration_date %></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <%= link_to "Edit", edit_admin_camp_path(@camp), class: "btn btn-success" %>
-
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td><%= @camp.name %></td>
+              </tr>
+              <tr>
+                <th scope="row">Start Date</th>
+                <td><%= @camp.start_date %></td>
+              </tr>
+              <tr>
+                <th scope="row">End Date</th>
+                <td><%= @camp.end_date %></td>
+              </tr>
+              <tr>
+                <th scope="row">Locations</th>
+                <td>
+                  <% @camp.locations.each do |location| %>
+                    <%= location.name %> 
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Registration Deadline</th>
+                <td><%= @camp.registration_date %></td>
+              </tr>
+            </tbody>
+          </table>
+          <%= link_to "Edit", edit_admin_camp_path(@camp), class: "btn btn-success" %>
+        </div>
       </div>
     </div>
   </div>
 </div>
+</section>

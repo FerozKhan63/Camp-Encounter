@@ -1,5 +1,3 @@
-require 'csv'
-
 class Camp < ApplicationRecord
   include PgSearch::Model
 
@@ -7,21 +5,25 @@ class Camp < ApplicationRecord
   has_many :users, through: :enrolments
   has_many :camp_locations, dependent: :destroy
   has_many :locations, through: :camp_locations
-
-  AlPHABETS_ONLY = /\A[a-zA-Z_ ]+\z/
-
-  pg_search_scope :global_search, against: [:name, :location], using: { tsearch: { prefix: true } }
   
-  validates :name, presence: true , length: { minimum: 2 }, format: { with: AlPHABETS_ONLY, message: "only allows letters" }
-  validates :end_date, :start_date, presence: true
+  pg_search_scope :global_search, against: [:name, :status], using: { tsearch: { prefix: true } }
+
+  ALPHABETS_ONLY = /\A[a-zA-Z_ ]+\z/
+  ACTIVE = :active
+  INACTIVE = :inactive
+  STATUS = [ACTIVE, INACTIVE]
+
+  enum status: STATUS, _default: :active  
+  
+  validates :name, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
+  validates :end_date, :start_date, :registration_date, presence: true
   validate :end_date_after_start_date? 
   validate :start_date_before_reg_date?
 
   private
 
-  def self.to_csv
-    attributes = %w{ name location status registration_date }
-    csv = ExportToCsv.create_csv_file(attributes, self)
+  def self.attributes
+    %w{ name location status registration_date }
   end
 
   def end_date_after_start_date?
