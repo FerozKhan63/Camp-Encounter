@@ -1,14 +1,5 @@
 <%= form_with(model: [:admin, @camp]) do |f| %>
-  <% if @camp.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@camp.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @camp.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/errors', object: @camp %>
 
   <div class="row">
     <div class="col-md-6 mb-4">

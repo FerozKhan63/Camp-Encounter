@@ -9,12 +9,11 @@ class Admin::CampsController < AdminController
 
     respond_to do |format|
       format.html
-      format.csv { send_data Camp.all.to_csv, filename: "Camps-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(Camp).call, filename: "Camps-#{Date.today}.csv" }
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @camp = Camp.new
@@ -23,9 +22,6 @@ class Admin::CampsController < AdminController
       format.js
       format.html 
     end 
-  end
-
-  def edit
   end
 
   def create
@@ -38,6 +34,16 @@ class Admin::CampsController < AdminController
     end
   end
 
+  def edit; end
+
+  def update
+    if @camp.update(camp_params)
+      redirect_to admin_camps_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @camp.destroy
 
@@ -47,10 +53,10 @@ class Admin::CampsController < AdminController
   end
 
   def toggle_status
-    if @camp.status == true
-      @camp.status = false
+    if @camp.active?
+      @camp.status = :inactive
     else
-      @camp.status = true
+      @camp.status = :active
     end
     @camp.save
     redirect_to admin_camps_path

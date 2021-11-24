@@ -1,6 +1,6 @@
 class Admin::LocationsController < AdminController
   include PagySearch
-  before_action :set_location, only: %i[ edit update destroy ]
+  before_action :set_location, only: %i[edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index 
@@ -8,7 +8,7 @@ class Admin::LocationsController < AdminController
 
     respond_to do |format|
       format.html
-      format.csv { send_data Location.all.to_csv, filename: "Locations-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(Location).call, filename: "Locations-#{Date.today}.csv" }
     end
   end
 

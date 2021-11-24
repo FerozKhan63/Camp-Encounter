@@ -1,5 +1,3 @@
-require 'csv'
-
 class User < ApplicationRecord
   include PgSearch::Model
 
@@ -33,9 +31,8 @@ class User < ApplicationRecord
   
   private
 
-  def self.to_csv
-    attributes = %w{id name email country country_code phone_number role }
-    csv = ExportToCsv.create_csv_file(attributes, self)
+  def self.attributes
+    %w{id name email country country_code phone_number role }
   end
 
   def password_required?

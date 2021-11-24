@@ -5,10 +5,10 @@ class Admin::UsersController < AdminController
 
   def index
     (@pagy, @users) = pagy_sort_filter(params[:query], User)
-
+    
     respond_to do |format|
       format.html
-      format.csv { send_data User.all.to_csv, filename: "Users-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(User).call, filename: "Users-#{Date.today}.csv" }
     end
   end
 
@@ -77,9 +77,5 @@ class Admin::UsersController < AdminController
 
   def sort_column
     User.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end
