@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'profile', to: 'users#show'
     get 'user/edit', to: 'users#edit'
-    get 'select_camp', to: 'users#select_camp'
-    patch 'enroll', to: 'users#enroll'
   end
 
   namespace :admin do
