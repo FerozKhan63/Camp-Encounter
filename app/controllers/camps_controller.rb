@@ -28,7 +28,7 @@ class CampsController < ApplicationController
   
   def check_enrolment
     @enrolment = Enrolment.find_by(user_id: current_user.id, camp_id: @camp.id)
-    if @enrolment.progress > 0
+    if @enrolment
       start_enrolment
     end
   end
