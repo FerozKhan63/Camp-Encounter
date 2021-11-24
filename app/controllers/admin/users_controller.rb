@@ -1,14 +1,10 @@
 class Admin::UsersController < AdminController
+  include PagySearch
   before_action :set_user, only: %i[show edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index
-    if params[:query].present?
-      @users = User.global_search(params[:query]).order(sort_column + " " + sort_direction)
-    else
-      @users = User.order(sort_column + " " + sort_direction)
-    end
-    @pagy, @users = pagy(@users, items: 3)
+    (@pagy, @users) = pagy_sort_filter(params[:query], User)
 
     respond_to do |format|
       format.html

@@ -1,14 +1,11 @@
 class Admin::CampsController < AdminController
+  include PagySearch
+  
   before_action :set_camp, only: %i[show edit update destroy toggle_status]
   helper_method :sort_column, :sort_direction
   
   def index
-    if params[:query].present?
-      @camps = Camp.global_search(params[:query]).order(sort_column + " " + sort_direction)
-    else
-      @camps = Camp.order(sort_column + " " + sort_direction)
-    end
-    @pagy, @camps = pagy(@camps, items: 3)
+    @pagy, @camps = pagy_sort_filter(params[:query], Camp)
 
     respond_to do |format|
       format.html
@@ -71,9 +68,5 @@ class Admin::CampsController < AdminController
   
   def sort_column
     Camp.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

@@ -1,14 +1,10 @@
 class Admin::LocationsController < AdminController
+  include PagySearch
   before_action :set_location, only: %i[ edit update destroy ]
   helper_method :sort_column, :sort_direction
 
   def index 
-    if params[:query].present?
-      @locations = Location.global_search(params[:query]).order(sort_column + " " + sort_direction)
-    else
-      @locations = Location.order(sort_column + " " + sort_direction)
-    end
-    @pagy, @locations = pagy(@locations, items: 3)
+    (@pagy, @locations) = pagy_sort_filter(params[:query], Location)
 
     respond_to do |format|
       format.html
@@ -57,9 +53,5 @@ class Admin::LocationsController < AdminController
 
   def sort_column
     Location.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

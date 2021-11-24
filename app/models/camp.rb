@@ -6,9 +6,11 @@ class Camp < ApplicationRecord
   has_many :camp_locations, dependent: :destroy
   has_many :locations, through: :camp_locations
 
-  pg_search_scope :global_search, against: [:name, :location], using: { tsearch: { prefix: true } }
+  pg_search_scope :global_search, against: [:name, :status], using: { tsearch: { prefix: true } }
+
+  ALPHABETS_ONLY = /\A[a-zA-Z]+\z/
   
-  validates :name, presence: true , length: { minimum: 2 }, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+  validates :name, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
   validates :end_date, :start_date, presence: true
   validate :end_date_after_start_date? 
   validate :start_date_before_reg_date?
