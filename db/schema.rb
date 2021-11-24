@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_114858) do
+ActiveRecord::Schema.define(version: 2021_11_09_051639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,50 @@ ActiveRecord::Schema.define(version: 2021_11_02_114858) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "camp_locations", force: :cascade do |t|
+    t.bigint "camp_id"
+    t.bigint "location_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_id"], name: "index_camp_locations_on_camp_id"
+    t.index ["location_id"], name: "index_camp_locations_on_location_id"
+  end
+
   create_table "camps", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "registration_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status"
+  end
+
+  create_table "enrolments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "camp_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "age"
+    t.string "gender"
+    t.string "mailing_address"
+    t.string "billing_address"
+    t.string "emergency_contact"
+    t.string "cnic"
+    t.text "medical_history"
+    t.text "experience"
+    t.boolean "tent_sharing"
+    t.string "camp_options"
+    t.integer "progress", default: 0
+    t.string "blood_group"
+    t.boolean "insurance"
+    t.boolean "submitted"
+    t.index ["camp_id"], name: "index_enrolments_on_camp_id"
+    t.index ["user_id"], name: "index_enrolments_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

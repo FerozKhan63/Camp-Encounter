@@ -1,17 +1,15 @@
 class Admin::UsersController < AdminController
+  include PagySearch
+  
   before_action :set_user, only: %i[show edit update destroy]
+  helper_method :sort_column, :sort_direction
 
   def index
-    if params[:query].present?
-      @users = User.global_search(params[:query])
-    else
-      @users = User.all
-    end
-    @pagy, @users = pagy(@users, items: 3)
-
+    (@pagy, @users) = pagy_sort_filter(params[:query], User)
+    
     respond_to do |format|
       format.html
-      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(User).call, filename: "Users-#{Date.today}.csv" }
     end
   end
 
@@ -76,5 +74,9 @@ class Admin::UsersController < AdminController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :country_code, :phone_number, :country, :country_select, 
       :role, :password, :password_confirmation, :profile_picture)
+  end
+
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
   end
 end

@@ -1,11 +1,10 @@
-require 'csv'
-
 class User < ApplicationRecord
   include PgSearch::Model
 
   attr_accessor :skip_password_validation
 
   has_one_attached :profile_picture, dependent: :destroy
+  has_many :camps
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
@@ -18,9 +17,9 @@ class User < ApplicationRecord
   USER = :user
   SUPER_ADMIN = :superadmin
   ROLES = [USER, SUPER_ADMIN, ADMIN]
-  
-  enum role: ROLES, _default: :user
-    
+
+  enum role: ROLES, _default: :user  
+
   validates :first_name, :country, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
   validates :phone_number, uniqueness: true, format: { with: PHONE_REGEX , message: " must be in xxx-xxx-xxxx format." }
   validates :password, format: {
@@ -32,16 +31,8 @@ class User < ApplicationRecord
   
   private
 
-  def self.to_csv
-    attributes = %w{id name email country country_code phone_number role}
-
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-
-      all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
-      end
-    end
+  def self.attributes
+    %w{id name email country country_code phone_number role }
   end
 
   def password_required?

@@ -1,65 +1,42 @@
-<h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">New User</h2><hr>
 <%= form_with(model: @user, url: admin_users_path) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/errors', object: @user %>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div>
-        <%= f.label :first_name %><br />
-        <%= f.text_field :first_name, autofocus: true, placeholder: "John", class: "form-control mb-1" %>
-      </div>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name, autofocus: true, placeholder: "John", class: "form-control mb-1" %>
     </div>
 
     <div class="col-md-6 mb-4">
-      <div>
-        <%= f.label :last_name %><br />
-        <%= f.text_field :last_name, placeholder: "Doe", class: "form-control mb-1" %>
-      </div>
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name, placeholder: "Doe", class: "form-control mb-1" %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div>
-        <%= f.label :email %><br />
-        <%= f.text_field :email, placeholder: "john.doe@campencounter.com", class: "form-control mb-1" %>
-      </div>
+      <%= f.label :email %><br />
+      <%= f.text_field :email, placeholder: "john.doe@campencounter.com", class: "form-control mb-1" %>
     </div>
 
     <div class="col-md-6 mb-4">
-      <div>
-        <%= f.label :phone_number %><br />
-        <%= f.text_field :country_code, placeholder: '92', class: "form-control-sm mb-1" %>
-        <%= f.text_field :phone_number, placeholder: "323-555-0000", class: "form-control mb-1" %>
-      </div>
+      <%= f.label :phone_number %><br />
+      <%= f.text_field :country_code, placeholder: '92', class: "form-control-sm mb-1" %>
+      <%= f.text_field :phone_number, placeholder: "323-555-0000", class: "form-control mb-1" %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-        <%= f.label :country %><br />
-        <%= f.country_select :country, {}, class: 'form-control' %>
-      </div>
+      <%= f.label :country %><br />
+      <%= f.country_select :country, {}, class: 'form-control' %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div>
-        <%= f.label :role %><br />
-        <%= f.select :role, ['admin', 'user'], {}, class: "form-control mb-1" %>
-      </div>
+      <%= f.label :role %><br />
+      <%= f.select :role, ['admin', 'user'], {}, class: "form-control mb-1" %>
     </div>
   </div>
  
