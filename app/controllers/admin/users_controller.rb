@@ -1,5 +1,6 @@
 class Admin::UsersController < AdminController
   include PagySearch
+  
   before_action :set_user, only: %i[show edit update destroy]
   helper_method :sort_column, :sort_direction
 

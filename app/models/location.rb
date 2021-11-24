@@ -12,7 +12,7 @@ class Location < ApplicationRecord
 
   private
 
-  def attributes
+  def self.attributes
     attributes = %w{ id name }
   end
 end

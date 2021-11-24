@@ -6,11 +6,6 @@
           <div class="card-body p-4 p-md-5">
             <h3 class="text-uppercase text-center mb-5">Welcome to Global Encounters</h3>
             <h5 class="text-uppercase text-center mb-5">Please Sign in or create an account</h5>
-            
-            <% flash.each do |type, msg| %>
-              <%= content_tag :div, msg, class: build_alert_classes(type) %>
-            <% end %>
-            <hr>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <%= render "devise/shared/error_messages", resource: resource %>
               <center>
