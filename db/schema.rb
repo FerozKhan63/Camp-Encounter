@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_051639) do
     t.datetime "registration_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "status"
+    t.integer "status"
   end
 
   create_table "enrolments", force: :cascade do |t|

@@ -1,77 +1,80 @@
-<%= render "layouts/formlayout" %>
-<div class="row d-flex justify-content-center align-items-center h-100">
-  <div class="col-lg-8 col-xl-6">
-    <div class="card rounded-3">
-      <div class="card-body p-4 p-md-5">
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
 
-        <table class="table">
-          <tbody>
-            <tr>
-              <th scope="row">Name</th>
-              <td><%= "#{current_user.first_name} #{current_user.last_name}" %></td>
-            </tr>
-            <tr>
-              <th scope="row">Email</th>
-              <td><%= current_user.email %></td>
-            </tr>
-            <tr>
-              <th scope="row">Phone Number</th>
-              <td><%= "#{current_user.country_code} #{current_user.phone_number}" %></td>
-            </tr>
-            <tr>
-              <th scope="row">Gender</th>
-              <td><%= @enrolment.gender %></td>
-            </tr>
-            <tr>
-              <th scope="row">Age</th>
-              <td><%= @enrolment.age %></td>
-            </tr>
-            <tr>
-              <th scope="row">CNIC</th>
-              <td><%= @enrolment.cnic %></td>
-            </tr>
-            <tr>
-              <th scope="row">Mailing Address</th>
-              <td><%= @enrolment.mailing_address %></td>
-            </tr>
-            <tr>
-              <th scope="row"> Billing Address</th>
-              <td><%= @enrolment.billing_address %></td>
-            </tr>
-            <tr>
-              <th scope="row">Camp Type</th>
-              <td><%= @enrolment.camp_options %></td>
-            </tr>
-            <tr>
-              <th scope="row">Sharing</th>
-              <td><%= @enrolment.tent_sharing %></td>
-            </tr>
-            <tr>
-              <th scope="row">Emergency Contact</th>
-              <td><%= @enrolment.emergency_contact %></td>
-            </tr>
-            <tr>
-              <th scope="row">Medical History</th>
-              <td><%= @enrolment.medical_history %></td>
-            </tr>
-            <tr>
-              <th scope="row">Insurance</th>
-              <td><%= @enrolment.insurance %></td>
-            </tr>
-            <tr>
-              <th scope="row">Blood Group</th>
-              <td><%= @enrolment.blood_group %></td>
-            </tr>
-            <tr>
-              <th scope="row">Camping Experience</th>
-              <td><%= @enrolment.experience %></td>
-            </tr>
-          </tbody>
-        </table>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td><%= "#{current_user.first_name} #{current_user.last_name}" %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td><%= current_user.email %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number</th>
+                  <td><%= "#{current_user.country_code} #{current_user.phone_number}" %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Gender</th>
+                  <td><%= @enrolment.gender %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Age</th>
+                  <td><%= @enrolment.age %></td>
+                </tr>
+                <tr>
+                  <th scope="row">CNIC</th>
+                  <td><%= @enrolment.cnic %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Mailing Address</th>
+                  <td><%= @enrolment.mailing_address %></td>
+                </tr>
+                <tr>
+                  <th scope="row"> Billing Address</th>
+                  <td><%= @enrolment.billing_address %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Camp Type</th>
+                  <td><%= @enrolment.camp_options %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Sharing</th>
+                  <td><%= @enrolment.tent_sharing %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Emergency Contact</th>
+                  <td><%= @enrolment.emergency_contact %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Medical History</th>
+                  <td><%= @enrolment.medical_history %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Insurance</th>
+                  <td><%= @enrolment.insurance %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Blood Group</th>
+                  <td><%= @enrolment.blood_group %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Camping Experience</th>
+                  <td><%= @enrolment.experience %></td>
+                </tr>
+              </tbody>
+            </table>
 
-        <%= link_to "Back to Dashboard", wizard_path(:dashboard), class: "btn btn-success" %>
+            <%= link_to "Back to Dashboard", wizard_path(:dashboard), class: "btn btn-success" %>
 
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

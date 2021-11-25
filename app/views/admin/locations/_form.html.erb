@@ -1,21 +1,10 @@
 <%= form_with(model: [:admin, @location] ) do |f| %>
-  <% if @location.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @location.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/errors', object: @location %>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-          <%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true, placeholder: "Kenya", size:"30" %>
-      </div>
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, placeholder: "Kenya", class: "form-control" %>
     </div>
   </div>
  

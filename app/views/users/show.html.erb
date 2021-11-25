@@ -1,6 +1,6 @@
-<section class = "vh-200" style = "background-color: #8fc4b7;" > 
+<section class="h-100 h-custom">
   <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3">
           <div class="card-body p-4 p-md-5">
@@ -8,8 +8,7 @@
               <% if @user.profile_picture.attached? %>
                 <%= image_tag @user.profile_picture, size: "220x220" %>
               <% end %>
-            </center> 
-            <hr>
+            </center><hr>
 
             <table class="table">
               <tbody>
@@ -35,12 +34,11 @@
                 </tr>
               </tbody>
             </table>
-
+            
             <%= link_to "Edit", user_edit_path, class: "btn btn-success" %>
-
           </div>
         </div>
       </div>
     </div>
-  <div>
-<section> 
+  </div>
+</section>

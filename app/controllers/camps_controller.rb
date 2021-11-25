@@ -2,16 +2,21 @@ class CampsController < ApplicationController
   before_action :set_camp, only: %i[show edit update destroy start_enrolment]
   before_action :authenticate_user!
   before_action :check_date, only: [:start_enrolment]
+
   before_action :check_enrolment, only: [:show]
+  before_action :set_enrolment, only: [:start_enrolment]
   
   def index
     @camps = Camp.all
   end
 
-  def show; end
+  def show
+    if @enrolment
+      start_enrolment
+    end
+  end
 
   def start_enrolment
-    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
     session[:enrolment_id] = @enrolment.id
     if @enrolment.progress == 0
       redirect_to enrolment_path(:personal_info)
@@ -32,7 +37,11 @@ class CampsController < ApplicationController
       start_enrolment
     end
   end
-  
+
+  def set_enrolment
+    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
+  end
+
   def check_date
     if @camp.start_date < Time.now
       redirect_to camps_path, alert: "This camp has already started, please select another camp"

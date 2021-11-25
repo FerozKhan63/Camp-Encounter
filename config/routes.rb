@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'profile', to: 'users#show'
     get 'user/edit', to: 'users#edit'
-    get 'select_camp', to: 'users#select_camp'
-    patch 'enroll', to: 'users#enroll'
   end
 
   namespace :admin do
@@ -24,5 +22,9 @@ Rails.application.routes.draw do
     resources :enrolments
   end
 
+  direct :privacy_policy do
+    "https://ge-stage-2019.herokuapp.com/privacy_policy"
+  end
+  
   root to: "home#index"
 end

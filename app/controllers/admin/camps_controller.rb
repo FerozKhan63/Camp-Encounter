@@ -1,21 +1,19 @@
 class Admin::CampsController < AdminController
-  before_action :set_camp, only: %i[ show edit update destroy toggle_status ]
+  include PagySearch
+  
+  before_action :set_camp, only: %i[show edit update destroy toggle_status]
   helper_method :sort_column, :sort_direction
   
   def index
-    if params[:query].present?
-      @pagy, @camps = pagy(Camp.global_search(params[:query]).order(sort_column + " " + sort_direction), items: 3)
-    else
-      @pagy, @camps = pagy(Camp.order(sort_column + " " + sort_direction), items: 3)
-    end
+    @pagy, @camps = pagy_sort_filter(params[:query], Camp)
+
     respond_to do |format|
       format.html
-      format.csv { send_data Camp.all.to_csv, filename: "Camps-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(Camp).call, filename: "Camps-#{Date.today}.csv" }
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @camp = Camp.new
@@ -25,7 +23,7 @@ class Admin::CampsController < AdminController
       format.html 
     end 
   end
-  
+
   def create
     @camp = Camp.new(camp_params)
 
@@ -36,15 +34,15 @@ class Admin::CampsController < AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @camp.update(camp_params)
-      render 'show'
+      redirect_to admin_camps_path
+    else
+      render 'edit'
     end
   end
-
 
   def destroy
     @camp.destroy
@@ -55,10 +53,10 @@ class Admin::CampsController < AdminController
   end
 
   def toggle_status
-    if @camp.status == true
-      @camp.status = false
-    else 
-      @camp.status = true
+    if @camp.active?
+      @camp.status = :inactive
+    else
+      @camp.status = :active
     end
     @camp.save
     redirect_to admin_camps_path
@@ -76,9 +74,5 @@ class Admin::CampsController < AdminController
   
   def sort_column
     Camp.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

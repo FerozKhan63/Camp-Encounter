@@ -5,8 +5,6 @@ class Admin::EnrolmentsController < AdminController
   
   def index
     @pagy, @enrolments = pagy(Enrolment.all, items: 3)
-    @enrolment = Enrolment.pluck(:user_id)
-    @users = User.find(@enrolment)
 
     respond_to do |format|
       format.html
