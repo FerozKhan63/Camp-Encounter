@@ -24,7 +24,7 @@ class CampsController < ApplicationController
   
   def set_camp
     @camp = Camp.find_by(id: params[:id])
-    redirect_to camps_path if !@camp
+    redirect_to camps_path unless @camp
   end
   
   def check_enrolment
