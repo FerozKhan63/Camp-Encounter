@@ -1,8 +1,8 @@
-require 'csv'
-
 class Camp < ApplicationRecord
   include PgSearch::Model
-  
+
+  has_many :enrolments
+  has_many :users, through: :enrolments
   has_many :camp_locations, dependent: :destroy
   has_many :locations, through: :camp_locations
 
@@ -13,7 +13,7 @@ class Camp < ApplicationRecord
   INACTIVE = :inactive
   STATUS = [ACTIVE, INACTIVE]
 
-  enum status: STATUS, _default: :active  
+  enum status: STATUS, _default: :active
   
   validates :name, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
   validates :end_date, :start_date, :registration_date, presence: true

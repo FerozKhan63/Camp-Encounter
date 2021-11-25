@@ -6,9 +6,9 @@ class Location < ApplicationRecord
 
   pg_search_scope :global_search, against: [:name], using: { tsearch: { prefix: true } }
 
-  ALPHABETS_ONLY = /\A[a-zA-Z]+\z/
+  AlPHABETS_ONLY = /\A[a-zA-Z_ ]+\z/
 
-  validates :name, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
+  validates :name, presence: true , length: { minimum: 2 }, format: { with: AlPHABETS_ONLY, message: "only allows letters" }
 
   private
 

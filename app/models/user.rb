@@ -4,7 +4,8 @@ class User < ApplicationRecord
   attr_accessor :skip_password_validation
 
   has_one_attached :profile_picture, dependent: :destroy
-  has_many :camps
+  has_many :enrolments, dependent: :destroy
+  has_many :camps, through: :enrolments
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 

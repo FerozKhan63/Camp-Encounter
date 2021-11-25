@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
+  
+  resources :camps do
+    post 'start_enrolment', on: :member
+  end
+  resources :enrolments
 
   devise_scope :user do
     get 'profile', to: 'users#show'

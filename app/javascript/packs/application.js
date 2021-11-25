@@ -5,3 +5,4 @@ require("channels")
 require("jquery")
 import $ from 'jquery';
 global.$ = jQuery;
+import 'bootstrap';

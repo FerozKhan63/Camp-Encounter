@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin? 
       admin_users_path
     else
-      root_path
+      camps_path
     end
   end
 end

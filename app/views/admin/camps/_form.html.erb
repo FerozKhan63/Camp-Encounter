@@ -29,7 +29,10 @@
  
   <div class="col-md-6 mb-4">
     <div class="form-check">
-      <%= f.collection_check_boxes :location_ids, Location.all, :id, :name %>
+     <%= f.collection_check_boxes(:location_ids, Location.all, :id, :name) do |b| %>
+       <%= b.check_box %>
+       <%= b.label(class:"label-checkbox") { b.text } %>
+     <% end %>
     </div>
   </div>
 

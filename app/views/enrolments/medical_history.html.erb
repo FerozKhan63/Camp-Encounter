@@ -1,0 +1,28 @@
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <%= render "progress_bar", object: @progress %><br>
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Medical History</h2><hr>
+            <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
+              <h5>Please briefly mention any prior medical history</h5>
+              
+              <div class="form-outline mb-4">
+                <%= f.text_area :medical_history, class: "form-control mb-4" %>
+              </div>
+              
+              <div class="form-outline">
+                <%= link_to "Previous", previous_wizard_path(enrolment: @enrolment), class: "btn btn-success" %>
+                <%= f.submit "Next", class: "btn btn-success" %>
+                <%= link_to "Skip", wizard_path(:cnic, enrolment: @enrolment), class: "btn btn-info" %>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

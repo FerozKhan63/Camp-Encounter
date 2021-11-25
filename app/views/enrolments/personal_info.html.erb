@@ -1,0 +1,59 @@
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <%= render "progress_bar", object: @progress %><br>
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Personal Information</h2><hr>
+            <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <%= f.label :first_name %><br />
+                  <%= f.text_field :first_name, autofocus: true, value: current_user.first_name, class: "form-control" %>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <%= f.label :last_name %><br />
+                  <%= f.text_field :last_name, value: current_user.last_name, class: "form-control" %>
+                </div>
+              </div>
+
+              <div>
+                <%= f.label :email %><br />
+                <%= f.email_field :email, value: current_user.email, autocomplete: "email", class: "form-control mb-4" %>
+              </div>
+              
+              <div class="form-outline mb-4">
+                <%= f.radio_button :gender, "Male" %>
+                <%= f.label :gender ,"Male" %>
+                <%= f.radio_button :gender, "Female" %>
+                <%= f.label :gender ,"Female" %>
+                <%= f.radio_button :gender, "Other" %>
+                <%= f.label :gender , "Other" %>
+              </div>
+
+              <div class="form-outline mb-4">
+                <%= f.label :age  %><br>
+                <%= f.text_field :age, class: "form-control w-25" %>
+              </div>
+
+                
+              <div>
+                <%= f.label :phone_number %><br />
+                <%= f.text_field :country_code, value: current_user.country_code, class: "form-control w-25 mb-4" %>
+                <%= f.text_field :phone_number, value: current_user.phone_number, class: "form-control w-50 mb-4" %>
+              </div><br>
+
+              <div class="form-outline">
+                <%= f.submit "Next", class: "btn btn-success" %>
+                <%= link_to "Skip", wizard_path(:camp_options, enrolment: @enrolment), class: "btn btn-info" %>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

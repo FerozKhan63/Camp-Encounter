@@ -1,0 +1,71 @@
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <%= render "progress_bar", object: @progress %><br>
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"><%= "You have completed #{@enrolment.progress}% of your application." %></h2><hr>
+            
+            <% if @enrolment.progress < 100 %>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Steps</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Personal Info</td>
+                    <td><%= link_to "Go", wizard_path(:personal_info), class: "btn btn-success" %></td>
+                  </tr>       
+                  <tr>
+                    <td>Camp Options</td>
+                    <td><%= link_to "Go", wizard_path(:camp_options), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Tent Sharing</td>
+                    <td><%= link_to "Go", wizard_path(:tent_sharing), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Emergency Contact</td>
+                    <td><%= link_to "Go", wizard_path(:emergency_contact), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Medical History</td>
+                    <td><%= link_to "Go", wizard_path(:medical_history), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Blood Group</td>
+                    <td><%= link_to "Go", wizard_path(:blood_group), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Insurance</td>
+                    <td><%= link_to "Go", wizard_path(:insurance), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Identity</td>
+                    <td><%= link_to "Go", wizard_path(:cnic), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Address</td>
+                    <td><%= link_to "Go", wizard_path(:address), class: "btn btn-success" %></td>
+                  </tr>
+                  <tr>
+                    <td>Experience</td>
+                    <td><%= link_to "Go", wizard_path(:experience), class: "btn btn-success" %></td>
+                  </tr>
+                </tbody>
+              </table>
+            <% else %>
+              <%= link_to "View Application", wizard_path(:view_application), class: "btn btn-primary" %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

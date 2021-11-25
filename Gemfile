@@ -34,6 +34,10 @@ gem 'pg_search'
 
 gem 'pagy'
 
+gem 'wicked'
+
+gem "interactor-rails", "~> 2.0"
+
 #Add  country to signup form
 gem 'country_select', '~> 6.0'
 

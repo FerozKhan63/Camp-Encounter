@@ -23,19 +23,16 @@ class Admin::UsersController < AdminController
   end
   
   def create
-    @user = User.new(user_params)
-    @user.skip_password_validation = true
-    @user.skip_confirmation!
-
-    raw, enc = Devise.token_generator.generate(User, :reset_password_token)
-    @user.reset_password_token   = enc
-    @user.reset_password_sent_at = Time.current
-
-    if @user.save
-      UserMailer.send_invite_email(@user,raw).deliver
+    result = InviteUser.call(user_params: user_params, 
+                            model_name: User, 
+                            token: :reset_password_token)
+    @user = result.user
+    
+    if result.success?
+      UserMailer.send_invite_email(@user, result.raw).deliver
       redirect_to admin_users_path, notice: "An invitation has been sent to the user!"
     else
-      flash.now[:error] = "There are some errors in the provided details. Please resubmit the form with the correct details."
+      flash.now[:error] = result.error
       render :new
     end
   end
