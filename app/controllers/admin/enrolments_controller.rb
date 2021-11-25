@@ -31,7 +31,8 @@ class Admin::EnrolmentsController < AdminController
   private
   
   def set_enrolment
-    @enrolment = Enrolment.find(params[:id])
+    @enrolment = Enrolment.find_by(id: params[:id])
+    redirect_to admin_enrolments_path if !@user
   end
 
   def check_progress

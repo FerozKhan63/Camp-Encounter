@@ -65,7 +65,7 @@ class Admin::UsersController < AdminController
 
   def set_user
     @user = User.find_by(id: params[:id])
-    redirect_to root_path if !@user
+    redirect_to admin_users_path if !@user
   end
 
   def user_params
