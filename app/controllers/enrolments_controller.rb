@@ -1,8 +1,9 @@
 class EnrolmentsController < ApplicationController
   include Wicked::Wizard
 
-  before_action :set_enrolment
   after_action :progress_bar, only: [:update]
+  before_action :set_enrolment
+  before_action :check_progress, only: [:update]
 
   steps :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
   :cnic, :address, :experience, :view_application, :dashboard
@@ -32,6 +33,12 @@ class EnrolmentsController < ApplicationController
 
   def set_enrolment
     @enrolment = Enrolment.find session[:enrolment_id]
+  end
+
+  def check_progress
+    if @enrolment.progress == 100
+      redirect_to wizard_path(:dashboard), alert: "You have already submitted this application"
+    end
   end
 
   def enrolment_params

@@ -45,7 +45,8 @@ class Admin::LocationsController < AdminController
   private
 
   def set_location
-    @location = Location.find(params[:id])
+    @location = Location.find_by(id: params[:id])
+    redirect_to admin_locations_path unless @location
   end
 
   def location_params

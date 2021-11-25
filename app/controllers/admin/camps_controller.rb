@@ -65,7 +65,8 @@ class Admin::CampsController < AdminController
   private
   
   def set_camp
-    @camp = Camp.find(params[:id])
+    @camp = Camp.find_by(id: params[:id])
+    redirect_to admin_camps_path unless @camp
   end
 
   def camp_params

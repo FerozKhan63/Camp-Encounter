@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :camps do
     post 'start_enrolment', on: :member
   end
-  resources :enrolments
+  resources :enrolments, only: [:show, :update]
 
   devise_scope :user do
     get 'profile', to: 'users#show'
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
     end
     resources :locations
+    resources :enrolments, except: [:new, :create]
   end
 
   direct :privacy_policy do
