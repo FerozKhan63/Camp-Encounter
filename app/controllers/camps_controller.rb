@@ -11,7 +11,7 @@ class CampsController < ApplicationController
   def show; end
 
   def start_enrolment
-    @enrolment = Enrolment.find_or_create_by(user_id: current_user.id, camp_id: @camp.id)
+    @enrolment = @camp.enrolments.find_or_create_by(user_id: current_user.id)
     session[:enrolment_id] = @enrolment.id
     if @enrolment.progress == 0
       redirect_to enrolment_path(:personal_info)
@@ -23,14 +23,13 @@ class CampsController < ApplicationController
   private
   
   def set_camp
-    @camp = Camp.find(params[:id])
+    @camp = Camp.find_by(id: params[:id])
+    redirect_to root_path if !@camp
   end
   
   def check_enrolment
-    @enrolment = Enrolment.find_by(user_id: current_user.id, camp_id: @camp.id)
-    if @enrolment
-      start_enrolment
-    end
+    @enrolment = @camp.enrolments.find_by(user_id: current_user.id)
+    start_enrolment if @enrolment
   end
 
   def check_date

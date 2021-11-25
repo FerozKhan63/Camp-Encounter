@@ -10,7 +10,7 @@
               <%= render 'shared/errors', object: @enrolment %>
 
               <div class="form-outline mb-4">
-                <p class="inline">Gender: </p>
+                <p class="d-inline">Gender: </p>
                 <%= f.radio_button :gender, "Male" %>
                 <%= f.label :gender ,"Male" %>
                 <%= f.radio_button :gender, "Female" %>
@@ -25,7 +25,7 @@
               </div>
 
               <div class="form-outline mb-4">
-                <p class="inline">Camp Options: </p>
+                <p class="d-inline">Camp Options: </p>
                 <%= f.radio_button :camp_options, "Glamp" %>
                 <%= f.label :camp_options ,"Glamp" %>
                 <%= f.radio_button :camp_options, "Camp" %>
@@ -33,7 +33,7 @@
               </div>
 
               <div class="form-outline mb-4">
-                <p class="inline">Tent Sharing: </p>
+                <p class="d-inline">Tent Sharing: </p>
                 <%= f.radio_button :tent_sharing, "true" %>
                 <%= f.label :tent_sharing , "Double" %>
                 <%= f.radio_button :tent_sharing, "false" %>
@@ -51,7 +51,7 @@
               </div> 
 
               <div class="form-outline mb-4">
-                <p class="inline">Insurance: </p>
+                <p class="d-inline">Insurance: </p>
                 <%= f.radio_button :insurance, "true" %>
                 <%= f.label :insurance , "Yes" %>
                 <%= f.radio_button :insurance, "false" %>

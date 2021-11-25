@@ -30,6 +30,10 @@ class User < ApplicationRecord
   validates :country_code, presence: true, length: { minimum: 2 }
   validates :terms_of_service , acceptance: { message: 'If you do not agree to the terms and service please contact global@campencounter.com' }
   
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def self.attributes
@@ -40,9 +44,5 @@ class User < ApplicationRecord
     return false if skip_password_validation
 
     super
-  end
-
-  def name
-    "#{first_name} #{last_name}"
   end
 end
