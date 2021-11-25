@@ -23,9 +23,11 @@ class Admin::UsersController < AdminController
   end
   
   def create
-    result = InviteUser.call(
-      user_params: user_params, model_name: User, token: :reset_password_token)
+    result = InviteUser.call(user_params: user_params, 
+                            model_name: User, 
+                            token: :reset_password_token)
     @user = result.user
+    
     if result.success?
       UserMailer.send_invite_email(@user, result.raw).deliver
       redirect_to admin_users_path, notice: "An invitation has been sent to the user!"
