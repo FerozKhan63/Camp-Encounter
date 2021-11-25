@@ -1,8 +1,8 @@
 class EnrolmentsController < ApplicationController
   include Wicked::Wizard
 
-  before_action :set_enrolment
   after_action :progress_bar, only: [:update]
+  before_action :set_enrolment
   before_action :check_progress, only: [:update]
 
   steps :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
@@ -13,25 +13,8 @@ class EnrolmentsController < ApplicationController
   end
 
   def update
+    @enrolment.update(enrolment_params)
     case step
-      when :personal_info
-        @enrolment.update(enrolment_params)
-      when :camp_options
-        @enrolment.update(enrolment_params)
-      when :tent_sharing
-        @enrolment.update(enrolment_params)
-      when :emergency_contact
-        @enrolment.update(enrolment_params)
-      when :medical_history
-        @enrolment.update(enrolment_params)
-      when :blood_group
-        @enrolment.update(enrolment_params)
-      when :insurance
-        @enrolment.update(enrolment_params)
-      when :cnic
-        @enrolment.update(enrolment_params)
-      when :address
-        @enrolment.update(enrolment_params)
       when :experience
         @enrolment.update(enrolment_params)
         jump_to(:dashboard)

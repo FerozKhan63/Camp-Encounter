@@ -1,25 +1,28 @@
-<%= render 'layouts/formlayout'%>
-<div class="row d-flex justify-content-center align-items-center h-100">
-  <div class="col-lg-8 col-xl-6">
-    <%= render "progress_bar", object: @progress %><br>
-    <div class="card rounded-3">
-      <div class="card-body p-4 p-md-5">
-        <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Please provide an emergency contact number</h2><hr>
-        <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
-   
-          <div class="form-outline mb-4">
-            <%= f.label :emergency_contact %>
-            <%= f.text_field :emergency_contact %>
-          </div>
-          
-          <div class="form-outline">
-            <%= link_to "Previous", previous_wizard_path(enrolment: @enrolment), class: "btn btn-success" %>
-            <%= f.submit "Next", class: "btn btn-success" %>
-             <%= link_to "Skip", wizard_path(:medical_history, enrolment: @enrolment), class: "btn btn-info" %>
-          </div>
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <%= render "progress_bar", object: @progress %><br>
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Please provide an emergency contact number</h2><hr>
+            <%= form_with(model: @enrolment, local: true, method: :put, url: wizard_path) do |f| %>
+       
+              <div class="form-outline mb-4">
+                <%= f.label :emergency_contact %>
+                <%= f.text_field :emergency_contact, class: "form-control w-50 mb-4" %>
+              </div>
+              
+              <div class="form-outline">
+                <%= link_to "Previous", previous_wizard_path(enrolment: @enrolment), class: "btn btn-success" %>
+                <%= f.submit "Next", class: "btn btn-success" %>
+                <%= link_to "Skip", wizard_path(:medical_history, enrolment: @enrolment), class: "btn btn-info" %>
+              </div>
 
-        <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

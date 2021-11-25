@@ -1,16 +1,15 @@
 class Admin::UsersController < AdminController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  include PagySearch
+  
+  before_action :set_user, only: %i[show edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index
-    if params[:query].present?
-      @pagy, @users = pagy(User.global_search(params[:query]).order(sort_column + " " + sort_direction), items: 3)
-    else
-      @pagy, @users = pagy(User.order(sort_column + " " + sort_direction), items: 3)
-    end
+    (@pagy, @users) = pagy_sort_filter(params[:query], User)
+    
     respond_to do |format|
       format.html
-      format.csv { send_data User.all.to_csv, filename: "Users-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(User).call, filename: "Users-#{Date.today}.csv" }
     end
   end
 
@@ -24,35 +23,28 @@ class Admin::UsersController < AdminController
   end
   
   def create
-    @user = User.new(user_params)
-    @user.skip_password_validation = true
-    @user.skip_confirmation!
-
-    raw, enc = Devise.token_generator.generate(User, :reset_password_token)
-    @user.reset_password_token   = enc
-    @user.reset_password_sent_at = Time.now.utc
-
-    if @user.save
-      UserMailer.send_invite_email(@user,raw).deliver
-      redirect_to admin_users_path
-      flash[:success] = "An invitation has been sent to the user!"
+    result = InviteUser.call(user_params: user_params, 
+                            model_name: User, 
+                            token: :reset_password_token)
+    @user = result.user
+    
+    if result.success?
+      UserMailer.send_invite_email(@user, result.raw).deliver
+      redirect_to admin_users_path, notice: "An invitation has been sent to the user!"
     else
-      flash.now[:error] = "There are some errors in the provided details. Please resubmit the form with the correct details."
+      flash.now[:error] = result.error
       render :new
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-   
+  def show   
     respond_to do |format|
       format.js
       format.html 
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -72,7 +64,8 @@ class Admin::UsersController < AdminController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    redirect_to admin_users_path unless @user
   end
 
   def user_params
@@ -82,9 +75,5 @@ class Admin::UsersController < AdminController
 
   def sort_column
     User.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

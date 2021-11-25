@@ -1,92 +1,97 @@
-<%= render 'layouts/formlayout'%>
-<div class="row d-flex justify-content-center align-items-center h-100">
-  <div class="col-lg-8 col-xl-6">
-    <div class="card rounded-3">
-      <div class="card-body p-4 p-md-5">
-        <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Edit User Application </h2><hr>
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Edit User Application </h2><hr>
 
-        <%= form_with(model: [:admin, @enrolment]) do |f| %>
-          <% if @enrolment.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@enrloment.errors.count, "error") %> prohibited this user from being saved:</h2>
-              <ul>
-                <% @enrolment.errors.each do |error| %>
-                  <li><%= error.full_message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+            <%= form_with(model: [:admin, @enrolment]) do |f| %>
+              <%= render 'shared/errors', object: @enrolment %>
 
-          <div class="form-outline mb-4">
-            <%= f.radio_button :gender, "Male" %>
-            <%= f.label :gender ,"Male" %>
-            <%= f.radio_button :gender, "Female" %>
-            <%= f.label :gender ,"Female" %>
-            <%= f.radio_button :gender, "Other" %>
-            <%= f.label :gender , "Other" %>
-          </div>
+              <div class="form-outline mb-4">
+                <p class="d-inline">Gender: </p>
+                <%= f.radio_button :gender, "Male" %>
+                <%= f.label :gender ,"Male" %>
+                <%= f.radio_button :gender, "Female" %>
+                <%= f.label :gender ,"Female" %>
+                <%= f.radio_button :gender, "Other" %>
+                <%= f.label :gender , "Other" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :age  %><br>
-            <%= f.text_field :age, size: "5" %>
-          </div>
+              <div>
+                <%= f.label :age %><br>
+                <%= f.text_field :age, class: "form-control w-25 mb-3" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.radio_button :camp_options, "Glamp" %>
-            <%= f.label :camp_options ,"Glamp" %>
-            <%= f.radio_button :camp_options, "Camp" %>
-            <%= f.label :camp_options , "Camp" %>
-          </div>
+              <div class="form-outline mb-4">
+                <p class="d-inline">Camp Options: </p>
+                <%= f.radio_button :camp_options, "Glamp" %>
+                <%= f.label :camp_options ,"Glamp" %>
+                <%= f.radio_button :camp_options, "Camp" %>
+                <%= f.label :camp_options , "Camp" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.radio_button :tent_sharing, "true" %>
-            <%= f.label :tent_sharing , "Double" %>
-            <%= f.radio_button :tent_sharing, "false" %>
-            <%= f.label :tent_sharing , "Single" %>
-          </div>
+              <div class="form-outline mb-4">
+                <p class="d-inline">Tent Sharing: </p>
+                <%= f.radio_button :tent_sharing, "true" %>
+                <%= f.label :tent_sharing , "Double" %>
+                <%= f.radio_button :tent_sharing, "false" %>
+                <%= f.label :tent_sharing , "Single" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.text_area :medical_history %>
-          </div>
+              <div class="form-outline mb-4">
+                <%= f.label :medical_history %>
+                <%= f.text_area :medical_history, class: "form-control w-75 mb-3" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :blood_group  %>
-            <%= f.select :blood_group, Enrolment::BlOODGROUPS %>
-          </div> 
+              <div class="form-outline mb-4">
+                <%= f.label :blood_group  %>
+                <%= f.select :blood_group, Enrolment::BLOODGROUPS, {}, class: "form-control w-25 mb-3" %>
+              </div> 
 
-          <div class="form-outline mb-4">
-            <%= f.radio_button :insurance, "true" %>
-            <%= f.label :insurance , "Yes" %>
-            <%= f.radio_button :insurance, "false" %>
-            <%= f.label :insurance , "No" %>
-          </div>
+              <div class="form-outline mb-4">
+                <p class="d-inline">Insurance: </p>
+                <%= f.radio_button :insurance, "true" %>
+                <%= f.label :insurance , "Yes" %>
+                <%= f.radio_button :insurance, "false" %>
+                <%= f.label :insurance , "No" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :cnic, "CNIC: " %>
-            <%= f.text_field :cnic, size: "20" %>
-          </div>
+              <div class="form-outline mb-4">
+                <%= f.label :cnic, "CNIC " %>
+                <%= f.text_field :cnic, class: "form-control w-50 mb-3" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :emergency_contact %>
-            <%= f.text_field :emergency_contact %>
-          </div>
+              <div class="form-outline mb-4">
+                <%= f.label :emergency_contact %>
+                <%= f.text_field :emergency_contact, class: "form-control w-50 mb-3" %>
+              </div>
 
-          <div class="form-outline mb-4">
-            <%= f.label :billing_address %>
-            <%= f.text_field :billing_address, size: "20" %>
+              <div class="form-outline mb-4">
+                <%= f.label :billing_address %>
+                <%= f.text_field :billing_address, class: "form-control w-50 mb-3" %>
+              </div>
+
+              <div class="form-outline mb-4">
+                <%= f.label :mailing_adrress %>
+                <%= f.text_field :mailing_address, class: "form-control w-50 mb-3" %>
+              </div>
+
+              <div class="form-outline mb-4">
+                <%= f.label :experience %>
+                <%= f.text_area :experience, class: "form-control w-75 mb-3" %>
+              </div>
+             
+              <br>
+             
+              <div class="actions">
+                <%= f.submit class: "btn btn-success" %>
+              </div>
+            <% end %>
           </div>
-          <div class="form-outline mb-4">
-            <%= f.label :mailing_adrress %>
-            <%= f.text_field :mailing_address, size: "20" %>
-          </div>
-         
-          <br>
-         
-          <div class="actions">
-            <%= f.submit class: "btn btn-success" %>
-          </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

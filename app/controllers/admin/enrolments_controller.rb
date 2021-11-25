@@ -1,16 +1,9 @@
 class Admin::EnrolmentsController < AdminController
-  before_action :set_enrolment, only: %i[ show edit update destroy ]
+  before_action :set_enrolment, only: %i[show edit update destroy]
   before_action :check_progress, only: [:show, :edit]
   
   def index
     @pagy, @enrolments = pagy(Enrolment.all, items: 3)
-    @enrolment = Enrolment.pluck(:user_id)
-    @users = User.find(@enrolment)
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data Enrolment.all.to_csv, filename: "enrolments-#{Date.today}.csv" }
-    end
   end
 
   def show
@@ -22,6 +15,8 @@ class Admin::EnrolmentsController < AdminController
   def update
     if @enrolment.update(enrolment_params)
       redirect_to admin_enrolments_path
+    else
+      render 'edit'
     end
   end
 
@@ -36,7 +31,14 @@ class Admin::EnrolmentsController < AdminController
   private
   
   def set_enrolment
-    @enrolment = Enrolment.find(params[:id])
+    @enrolment = Enrolment.find_by(id: params[:id])
+    redirect_to admin_enrolments_path unless @enrolment
+  end
+
+  def check_progress
+    if @enrolment.progress != 100
+      redirect_to admin_enrolments_path, alert: "Can only view or edit application after 100 percent completion."
+    end
   end
 
   def check_progress
@@ -47,6 +49,6 @@ class Admin::EnrolmentsController < AdminController
 
   def enrolment_params
     params.require(:enrolment).permit(:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, :cnic, 
-      :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
+                                      :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
   end
 end

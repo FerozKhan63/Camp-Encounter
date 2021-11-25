@@ -1,16 +1,15 @@
 class Admin::LocationsController < AdminController
-  before_action :set_location, only: %i[ edit update destroy ]
+  include PagySearch
+  
+  before_action :set_location, only: %i[edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index 
-    if params[:query].present?
-      @pagy, @locations = pagy(Location.global_search(params[:query]).order(sort_column + " " + sort_direction), items: 3)
-    else
-      @pagy, @locations = pagy(Location.order(sort_column + " " + sort_direction), items: 3)
-    end
+    (@pagy, @locations) = pagy_sort_filter(params[:query], Location)
+
     respond_to do |format|
       format.html
-      format.csv { send_data Location.all.to_csv, filename: "Locations-#{Date.today}.csv" }
+      format.csv { send_data ExportToCsvService.new(Location).call, filename: "Locations-#{Date.today}.csv" }
     end
   end
 
@@ -29,8 +28,7 @@ class Admin::LocationsController < AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @location.update(location_params)
@@ -47,7 +45,8 @@ class Admin::LocationsController < AdminController
   private
 
   def set_location
-    @location = Location.find(params[:id])
+    @location = Location.find_by(id: params[:id])
+    redirect_to admin_locations_path unless @location
   end
 
   def location_params
@@ -56,9 +55,5 @@ class Admin::LocationsController < AdminController
 
   def sort_column
     Location.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

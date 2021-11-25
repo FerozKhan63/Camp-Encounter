@@ -12,8 +12,7 @@ class Location < ApplicationRecord
 
   private
 
-  def self.to_csv
+  def self.attributes
     attributes = %w{ id name }
-    csv = ExportToCsv.create_csv_file(attributes, self)
   end
 end

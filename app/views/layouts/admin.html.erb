@@ -11,9 +11,9 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/flash' %>
     <%= render 'admin/shared/sidebar' %>
-    <%= render 'shared/flash', resource: flash[:notice] %>
     <%= yield %>
   </body>
 </html>

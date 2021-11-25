@@ -1,33 +1,33 @@
-<%= render "layouts/formlayout" %>
-<div class="row d-flex justify-content-center align-items-center h-100">
-  <div class="col-lg-8 col-xl-6">
-    <div class="card rounded-3">
-      <div class="card-body p-4 p-md-5">
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
 
-        <h1>Please select a Camp</h1>
-        
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th></th>
-            </tr>
-          </thead>
+            <h1>Please select a Camp</h1>
+            
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th></th>
+                </tr>
+              </thead>
 
-          <tbody>
-            <% @camps.each do |camp| %>
-              <tr id="camp_<%= camp.id %>">
-                <td><%= camp.name %></td>
-                <td><%= link_to "Enroll", camp_path(camp), class:"btn btn-success" %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-
-      </div>
+              <tbody>
+                <% @camps.each do |camp| %>
+                  <tr id="camp_<%= camp.id %>">
+                    <td><%= camp.name %></td>
+                    <td><%= link_to "Enroll", camp_path(camp), class:"btn btn-success" %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      <div>
     </div>
-  <div>
-<div>
-
-  
+  </div>
+</section>

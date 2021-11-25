@@ -1,68 +1,44 @@
-<%= form_with(model: @user, url: admin_users_path) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with model: [:admin, @user] do |f| %>
+  <%= render 'shared/errors', object: @user %>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-          <%= f.label :first_name %><br />
-          <%= f.text_field :first_name, autofocus: true, placeholder: "John", size:"25" %>
-      </div>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name, autofocus: true, placeholder: "John", class: "form-control mb-1" %>
     </div>
 
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-        <%= f.label :last_name %><br />
-        <%= f.text_field :last_name, autofocus: true, placeholder: "Doe", size: "25" %>
-      </div>
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name, placeholder: "Doe", class: "form-control mb-1" %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-          <%= f.label :email %><br />
-          <%= f.text_field :email, autofocus: true, placeholder: "john.doe@campencounter.com", size:"25" %>
-      </div>
+      <%= f.label :email %><br />
+      <%= f.text_field :email, placeholder: "john.doe@campencounter.com", class: "form-control mb-1" %>
     </div>
 
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-        <%= f.label :phone_number %><br />
-        <%= f.text_field :country_code, autofocus: true, placeholder: '92', size: "5" %>
-        <%= f.text_field :phone_number, autofocus: true, placeholder: "323-555-0000", size: "18" %>
-      </div>
+      <%= f.label :phone_number %><br />
+      <%= f.text_field :country_code, placeholder: '92', class: "form-control-sm mb-1" %>
+      <%= f.text_field :phone_number, placeholder: "323-555-0000", class: "form-control mb-1" %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-          <%= f.label :country %><br />
-          <%= f.country_select :country, autofocus: true, size:"20" %>
-      </div>
+      <%= f.label :country %><br />
+      <%= f.country_select :country, {}, class: 'form-control' %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="form-outline">
-          <%= f.label :role %><br />
-          <%= f.select :role, ['admin', 'user'], size: "10" %>
-      </div>
+      <%= f.label :role %><br />
+      <%= f.select :role, ['admin', 'user'], {}, class: "form-control mb-1" %>
     </div>
   </div>
- 
-  <br>
  
   <div class="actions">
     <%= f.submit class: "btn btn-success" %>
