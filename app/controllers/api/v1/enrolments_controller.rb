@@ -41,7 +41,10 @@ class Api::V1::EnrolmentsController < ApplicationController
   end
 
   def enrolment_params
-    params.permit(:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, 
-      :cnic, :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance, :user_id, :camp_id)
+    params.require(:enrolment).permit(
+    :gender, :age, :camp_options, :tent_sharing, :emergency_contact,
+    :medical_history, :blood_group, :cnic, :billing_address, :mailing_address,
+    :experience, :progress, :submitted, :insurance
+    )
   end
 end

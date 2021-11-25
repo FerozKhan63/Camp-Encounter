@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :camps do
+  resources :camps, only: [:show, :index] do
     post 'start_enrolment', on: :member
   end
   resources :enrolments, only: [:show, :update]
-  
+
   devise_scope :user do
     get 'profile', to: 'users#show'
     get 'user/edit', to: 'users#edit'
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         get :toggle_status
       end
     end
-    resources :locations
+    resources :locations, except: [:show]
     resources :enrolments, except: [:new, :create]
   end
 
@@ -31,6 +31,6 @@ Rails.application.routes.draw do
   direct :privacy_policy do
     "https://ge-stage-2019.herokuapp.com/privacy_policy"
   end
-  
+
   root to: "home#index"
 end
