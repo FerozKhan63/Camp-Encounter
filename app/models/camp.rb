@@ -5,7 +5,7 @@ class Camp < ApplicationRecord
   has_many :users, through: :enrolments
   has_many :camp_locations, dependent: :destroy
   has_many :locations, through: :camp_locations
-  
+
   pg_search_scope :global_search, against: [:name, :status], using: { tsearch: { prefix: true } }
 
   ALPHABETS_ONLY = /\A[a-zA-Z_ ]+\z/
