@@ -2,8 +2,8 @@ class Api::V1::EnrolmentsController < Api::BaseController
   before_action :set_enrolment, only: %i[show update destroy]
   
   def index
-    enrolments = Enrolment.all 
-    render json: enrolments
+    @enrolments = Enrolment.all 
+    render json: @enrolments
   end 
 
   def show

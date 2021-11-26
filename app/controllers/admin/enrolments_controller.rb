@@ -1,6 +1,6 @@
 class Admin::EnrolmentsController < AdminController
   before_action :set_enrolment, only: %i[show edit update destroy]
-  before_action :check_progress, only: [ :show, :edit]
+  before_action :check_progress, only: [:show, :edit]
   
   def index
     @pagy, @enrolments = pagy(Enrolment.all, items: 3)
