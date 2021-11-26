@@ -36,7 +36,7 @@ class Admin::EnrolmentsController < AdminController
   end
 
   def check_progress
-    if @enrolment.completed?
+    unless @enrolment.completed?
       redirect_to admin_enrolments_path, alert: "Can only view or edit application after 100 percent completion."
     end
   end
