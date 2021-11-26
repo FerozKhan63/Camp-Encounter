@@ -48,10 +48,10 @@ class Admin::EnrolmentsController < AdminController
   end
 
   def enrolment_params
-    params.require(:enrolment).permit(
-    :gender, :age, :camp_options, :tent_sharing, :emergency_contact,
-    :medical_history, :blood_group, :cnic, :billing_address, :mailing_address,
-    :experience, :progress, :submitted, :insurance
+    params.permit(
+      :gender, :age, :camp_options, :tent_sharing, :emergency_contact, 
+      :medical_history, :blood_group, :cnic, :billing_address, :mailing_address, 
+      :experience, :progress, :submitted, :insurance
     )
   end
 end

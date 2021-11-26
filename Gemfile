@@ -38,6 +38,8 @@ gem 'wicked'
 
 gem "interactor-rails", "~> 2.0"
 
+gem 'active_model_serializers'
+
 #Add  country to signup form
 gem 'country_select', '~> 6.0'
 

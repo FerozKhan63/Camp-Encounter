@@ -1,10 +1,9 @@
-class Api::V1::EnrolmentsController < ApplicationController
+class Api::V1::EnrolmentsController < Api::BaseController
   before_action :set_enrolment, only: %i[show update destroy]
-  skip_before_action :verify_authenticity_token
   
   def index
-    @enrolments = Enrolment.all 
-    render json: @enrolments
+    enrolments = Enrolment.all 
+    render json: enrolments
   end 
 
   def show
@@ -13,7 +12,6 @@ class Api::V1::EnrolmentsController < ApplicationController
 
   def create
     @enrolment = Enrolment.new(enrolment_params)
-    @camp = Camp.new
     if @enrolment.save
       render json: @enrolment
     else
@@ -30,9 +28,8 @@ class Api::V1::EnrolmentsController < ApplicationController
   end
 
   def destroy
-    @enrolments = Enrolment.all 
     @enrolment.destroy
-    render json: @enrolments
+    render json: { alert: "Record was deleted" }
   end
 
   private
@@ -43,9 +40,9 @@ class Api::V1::EnrolmentsController < ApplicationController
 
   def enrolment_params
     params.permit(
-    :gender, :age, :camp_options, :tent_sharing, :emergency_contact,
-    :medical_history, :blood_group, :cnic, :billing_address, :mailing_address,
-    :experience, :progress, :submitted, :insurance, :user_id, :camp_id
+      :gender, :age, :camp_options, :tent_sharing, :emergency_contact, 
+      :medical_history, :blood_group, :cnic, :billing_address, :mailing_address, 
+      :experience, :progress, :submitted, :insurance, :user_id, :camp_id
     )
   end
 end
