@@ -14,6 +14,9 @@ class EnrolmentsController < ApplicationController
 
   def update
     @enrolment.update(enrolment_params)
+    if !@enrolment.update(enrolment_params)
+      @enrolment.errors.full_messages
+    end
     case step
       when :experience
         @enrolment.update(enrolment_params)
@@ -42,10 +45,10 @@ class EnrolmentsController < ApplicationController
   end
 
   def enrolment_params
-   params.permit(
+   params.require(:enrolment).permit(
       :gender, :age, :camp_options, :tent_sharing, :emergency_contact, 
       :medical_history, :blood_group, :cnic, :billing_address, :mailing_address, 
-      :experience, :progress, :submitted, :insurance
+      :experience, :progress, :submitted, :insurance,
     )
   end
 
