@@ -16,7 +16,7 @@ class Camp < ApplicationRecord
   enum status: STATUS, _default: :active
   
   validates :name, presence: true , length: { minimum: 2 }, format: { with: ALPHABETS_ONLY, message: "only allows letters" }
-  validates :end_date, :start_date, :registration_date, presence: true
+  validates :end_date, :start_date, presence: true
   validate :end_date_after_start_date? 
   validate :start_date_before_reg_date?
 
@@ -27,16 +27,16 @@ class Camp < ApplicationRecord
   end
 
   def end_date_after_start_date?
-    unless self.end_date.nil? && self.start_date.nil?
-      if self.end_date < self.start_date
+    if !end_date.nil? && !start_date.nil?
+      if end_date < start_date
         errors.add :end_date, "must be after start date"
       end
     end
   end
 
   def start_date_before_reg_date?
-    unless self.start_date.nil? && self.registration_date.nil?
-      if self.start_date < self.registration_date
+    if !end_date.nil? && !registration_date.nil?
+      if end_date < registration_date
         errors.add :start_date, "must be after registration date"
       end
     end

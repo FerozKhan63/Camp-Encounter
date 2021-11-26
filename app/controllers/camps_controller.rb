@@ -5,7 +5,7 @@ class CampsController < ApplicationController
   before_action :check_enrolment, only: [:show]
   
   def index
-    @camps = Camp.all
+    @camps = Camp.where(status: 0)
   end
 
   def show; end
