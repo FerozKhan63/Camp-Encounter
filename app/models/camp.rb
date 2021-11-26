@@ -27,14 +27,18 @@ class Camp < ApplicationRecord
   end
 
   def end_date_after_start_date?
-    if self.end_date < self.start_date
-      errors.add :end_date, "must be after start date"
+    unless self.end_date.nil? && self.start_date.nil?
+      if self.end_date < self.start_date
+        errors.add :end_date, "must be after start date"
+      end
     end
   end
 
   def start_date_before_reg_date?
-    if self.start_date < self.registration_date
-      errors.add :start_date, "must be after registration date"
+    unless self.start_date.nil? && self.registration_date.nil?
+      if self.start_date < self.registration_date
+        errors.add :start_date, "must be after registration date"
+      end
     end
   end
 

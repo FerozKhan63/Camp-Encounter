@@ -36,14 +36,17 @@ class EnrolmentsController < ApplicationController
   end
 
   def check_progress
-    if @enrolment.progress == 100
+    if @enrolment.completed?
       redirect_to wizard_path(:dashboard), alert: "You have already submitted this application"
     end
   end
 
   def enrolment_params
-   params.require(:enrolment).permit(:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, :cnic, 
-    :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
+   params.permit(
+      :gender, :age, :camp_options, :tent_sharing, :emergency_contact, 
+      :medical_history, :blood_group, :cnic, :billing_address, :mailing_address, 
+      :experience, :progress, :submitted, :insurance
+    )
   end
 
 end

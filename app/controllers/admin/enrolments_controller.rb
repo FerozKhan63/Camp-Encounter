@@ -36,13 +36,16 @@ class Admin::EnrolmentsController < AdminController
   end
 
   def check_progress
-    if @enrolment.progress != 100
+    unless @enrolment.completed?
       redirect_to admin_enrolments_path, alert: "Can only view or edit application after 100 percent completion."
     end
   end
 
   def enrolment_params
-    params.require(:enrolment).permit(:gender, :age, :camp_options, :tent_sharing, :emergency_contact, :medical_history, :blood_group, :cnic, 
-    :billing_address, :mailing_address, :experience, :progress, :submitted, :insurance)
+    params.permit(
+      :gender, :age, :camp_options, :tent_sharing, :emergency_contact, 
+      :medical_history, :blood_group, :cnic, :billing_address, :mailing_address, 
+      :experience, :progress, :submitted, :insurance
+    )
   end
 end
