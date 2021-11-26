@@ -36,7 +36,7 @@ class EnrolmentsController < ApplicationController
   end
 
   def check_progress
-    if @enrolment.progress == 100
+    if @enrolment.completed?
       redirect_to wizard_path(:dashboard), alert: "You have already submitted this application"
     end
   end

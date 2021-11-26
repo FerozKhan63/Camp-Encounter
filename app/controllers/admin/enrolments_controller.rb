@@ -1,6 +1,6 @@
 class Admin::EnrolmentsController < AdminController
   before_action :set_enrolment, only: %i[show edit update destroy]
-  before_action :check_progress, only: [:show, :edit]
+  before_action :check_progress, only: [ :show, :edit]
   
   def index
     @pagy, @enrolments = pagy(Enrolment.all, items: 3)
@@ -36,13 +36,7 @@ class Admin::EnrolmentsController < AdminController
   end
 
   def check_progress
-    if @enrolment.progress != 100
-      redirect_to admin_enrolments_path, alert: "Can only view or edit application after 100 percent completion."
-    end
-  end
-
-  def check_progress
-    if @enrolment.progress != 100
+    if @enrolment.completed?
       redirect_to admin_enrolments_path, alert: "Can only view or edit application after 100 percent completion."
     end
   end
