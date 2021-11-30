@@ -9,11 +9,19 @@
               <tbody>
                 <tr>
                   <th scope="row">Name</th>
-                  <td><%= @user.name %></td>
+                  <td><%= @enrolment.user.name %></td>
                 </tr>
                 <tr>
                   <th scope="row">Email</th>
-                  <td><%= @user.email %></td>
+                  <td><%= @enrolment.user.email %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number</th>
+                  <td><%= @enrolment.user.phone_number %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Camp</th>
+                  <td><%= @enrolment.camp.name %></td>
                 </tr>
                 <tr>
                   <th scope="row">Gender</th>

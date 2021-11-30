@@ -83,14 +83,14 @@ ActiveRecord::Schema.define(version: 2021_11_30_060211) do
     t.string "billing_address"
     t.string "emergency_contact"
     t.string "cnic"
-    t.text "medical_history"
-    t.text "experience"
     t.boolean "tent_sharing"
     t.string "camp_options"
     t.integer "progress", default: 0
     t.string "blood_group"
     t.boolean "insurance"
     t.boolean "submitted"
+    t.text "experience"
+    t.text "medical_history"
     t.index ["camp_id"], name: "index_enrolments_on_camp_id"
     t.index ["user_id"], name: "index_enrolments_on_user_id"
   end

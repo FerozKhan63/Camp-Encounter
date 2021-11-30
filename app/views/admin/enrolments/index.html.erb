@@ -6,8 +6,9 @@
       <thead>
         <tr>
           <th>Application ID</th>
-          <th>Name</th>
-          <th>Email</th>
+          <th>Camp</th>
+          <th>Applicant Name</th>
+          <th>Applicant Email</th>
           <th>Progress</th>
           <th>Status</th>
           <th>Actions</th>
@@ -18,6 +19,7 @@
         <% @enrolments.each do |enrolment| %>
           <tr id="enrolment_<%= enrolment.id %>">
             <td><%= enrolment.id %></td>
+            <td><%= enrolment.camp.name %>
             <td><%= enrolment.user.name %></td>
             <td><%= enrolment.user.email %></td>
             <td><%= "#{enrolment.progress}%" %></td>

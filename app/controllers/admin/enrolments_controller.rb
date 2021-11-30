@@ -6,9 +6,7 @@ class Admin::EnrolmentsController < AdminController
     @pagy, @enrolments = pagy(Enrolment.all, items: 3)
   end
 
-  def show
-    @user = User.find_by(id: @enrolment.user_id) 
-  end
+  def show; end
 
   def edit; end
 
