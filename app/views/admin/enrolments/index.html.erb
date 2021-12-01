@@ -5,7 +5,7 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Application ID</th>
+          <th><%= sortable "id", "Application ID" %></th>
           <th>Camp</th>
           <th>Applicant Name</th>
           <th>Applicant Email</th>
@@ -18,7 +18,7 @@
       <tbody>
         <% @enrolments.each do |enrolment| %>
           <tr id="enrolment_<%= enrolment.id %>">
-            <td><%= enrolment.id %></td>
+            <td><%= enrolment.id %></td> 
             <td><%= enrolment.camp.name %>
             <td><%= enrolment.user.name %></td>
             <td><%= enrolment.user.email %></td>
