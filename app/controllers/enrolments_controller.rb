@@ -6,7 +6,7 @@ class EnrolmentsController < ApplicationController
   before_action :check_progress, only: [:update]
 
   steps :personal_info, :camp_options, :tent_sharing, :emergency_contact, :medical_history , :blood_group, :insurance, 
-  :cnic, :address, :experience, :view_application, :dashboard
+        :cnic, :address, :experience, :view_application, :dashboard
 
   def show
     render_wizard

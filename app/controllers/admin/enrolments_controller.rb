@@ -1,14 +1,15 @@
 class Admin::EnrolmentsController < AdminController
+  include PagySearch
+
   before_action :set_enrolment, only: %i[show edit update destroy]
   before_action :check_progress, only: [:show, :edit]
+  helper_method :sort_column, :sort_direction
   
   def index
-    @pagy, @enrolments = pagy(Enrolment.all, items: 3)
+    @pagy, @enrolments = pagy_sort_filter(params[:query], Enrolment)
   end
 
-  def show
-    @user = User.find_by(id: @enrolment.user_id) 
-  end
+  def show; end
 
   def edit; end
 
@@ -47,5 +48,9 @@ class Admin::EnrolmentsController < AdminController
       :medical_history, :blood_group, :cnic, :billing_address, :mailing_address, 
       :experience, :progress, :submitted, :insurance
     )
+  end
+
+   def sort_column
+    Enrolment.column_names.include?(params[:sort]) ? params[:sort] : "id"
   end
 end

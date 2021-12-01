@@ -24,8 +24,8 @@ class Admin::UsersController < AdminController
   
   def create
     result = InviteUser.call(user_params: user_params, 
-                            model_name: User, 
-                            token: :reset_password_token)
+                             model_name: User, 
+                             token: :reset_password_token)
     @user = result.user
     
     if result.success?
@@ -69,8 +69,10 @@ class Admin::UsersController < AdminController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :country_code, :phone_number, :country, :country_select, 
-      :role, :password, :password_confirmation, :profile_picture)
+    params.require(:user).permit(
+      :first_name, :last_name, :email, :country_code, :phone_number, :country, 
+      :country_select, :role, :password, :password_confirmation, :profile_picture
+    )
   end
 
   def sort_column
