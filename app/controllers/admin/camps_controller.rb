@@ -54,12 +54,11 @@ class Admin::CampsController < AdminController
 
   def toggle_status
     if @camp.active?
-      @camp.status = :inactive
+      @camp.inactive!
     else
-      @camp.status = :active
+      @camp.active!
     end
     @camp.save
-    redirect_to admin_camps_path
   end
 
   private

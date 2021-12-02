@@ -15,6 +15,6 @@
     <%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-danger"%>
   </td> 
   <td>
-    <%= link_to "Set Status", toggle_status_admin_camp_path(camp), class: "btn btn-success" %>
+    <%= link_to "Set Status", toggle_status_admin_camp_path(camp), remote: true, class: "btn btn-success" %>
   </td>
 </tr>
