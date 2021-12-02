@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :users
     resources :camps do
       member do
-        get :toggle_status
+        get :toggle_status, default: {format: :js}
       end
     end
     resources :locations, except: [:show]
