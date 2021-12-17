@@ -23,7 +23,22 @@ class EnrolmentsController < ApplicationController
         jump_to(:dashboard)
      end
     render_wizard @enrolment
-  end 
+  end
+
+  def payment
+    @client_token = PaymentService.generate_token(@enrolment.user)
+  end
+
+  def transaction
+    payment = PaymentService.subscription(@enrolment.camp.cost, params, @enrolment.user)
+    if payment.success? || payment.transaction
+      redirect_to camps_path
+      flash[:success] = "Your payment has been accepted"
+    else
+      redirect_to camps_path
+       flash[:alert] = "#{payment.errors.map(&:message).to_sentence}"
+    end
+  end
 
   private
 
