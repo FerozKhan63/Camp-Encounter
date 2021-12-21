@@ -13,9 +13,9 @@ class PaymentService
   def self.create_braintree_customer(user, params)
     if user.braintree_customer_id.blank?
         customer = Braintree::Customer.create(
-        first_name: "B",
-        last_name: "B",
-        email: "B@a.com"
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email
       )
       user.update(braintree_customer_id: customer.customer.id)
       braintree_customer = customer.customer
@@ -34,6 +34,7 @@ class PaymentService
   end
 
   def self.subscription(amount, params, user)
+    byebug
     result = Braintree::Subscription.create({
         payment_method_nonce: params[:nonce],
         plan_id: "63hm",
