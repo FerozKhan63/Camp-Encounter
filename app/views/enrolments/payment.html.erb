@@ -1,0 +1,54 @@
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Payment</h2><hr>
+            <h4 class="mb-4 pb-2 pb-md-0  px-md-2"><%= "Cost: #{@enrolment.camp.cost}" %></h4>
+
+
+            <div>
+              <%= form_with url: transaction_path, id: "payment-form", local: false do |f| %>
+                <div id="dropin-container"></div>
+                <%= f.hidden_field :nonce, id: 'nonce' %>
+                <div class="actions">
+                  <%= link_to 'Confirm', 'javascript:void(0);', id: 'payment-submission', class: 'btn btn-primary m-2' %>
+                </div>
+              <% end %>
+            </div>
+
+            <script src="https://js.braintreegateway.com/web/dropin/1.32.1/js/dropin.min.js"></script>
+
+            <script>
+              var form = $('#payment-form');
+              var submitButton = $('#payment-submission');
+              var client_token = "<%= @client_token %>"
+
+              braintree.dropin.create({
+                authorization: client_token,
+                selector: '#dropin-container'
+              }, function (err, dropinInstance) {
+                if (err) {
+                  console.log('braintree Error',err);
+                  return;
+                }
+                submitButton.on('click', function (event) {
+                  dropinInstance.requestPaymentMethod(function (err, payload) {
+
+                      if (err) {
+                        console.log('payload Error', err);
+                      }
+
+                      $('#nonce').val(payload.nonce);
+                      form.submit();
+                    });
+                });
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

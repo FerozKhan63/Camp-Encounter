@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :camps, only: [:show, :index] do
     post 'start_enrolment', on: :member
   end
-  resources :enrolments, only: [:show, :update]
+  resources :enrolments, only: [:show, :update] do
+    member do
+      get :payment
+    end
+  end
 
   devise_scope :user do
     get 'profile', to: 'users#show'
@@ -31,6 +35,8 @@ Rails.application.routes.draw do
   direct :privacy_policy do
     "https://ge-stage-2019.herokuapp.com/privacy_policy"
   end
+
+  post 'transcation', to: "enrolments#transaction", as: "transaction"
 
   root to: "home#index"
 end
